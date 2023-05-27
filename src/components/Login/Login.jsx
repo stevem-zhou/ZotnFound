@@ -11,11 +11,13 @@ import {
   Link,
   Stack,
   Image,
-  Center
+  Center,
 } from '@chakra-ui/react'
 import logo from '../../assets/images/logo.png'
 
-export default function Login () {
+
+export default function Login() {
+  
   return (
     <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
       <Flex p={8} flex={1} align={'center'} justify={'center'}>
@@ -48,19 +50,20 @@ export default function Login () {
               <Checkbox>Remember me</Checkbox>
               <Link color={'blue.500'}>Forgot password?</Link>
             </Stack>
+
             <Button colorScheme={'blue'} variant={'solid'}>
               Sign in
             </Button>
-          </Stack>
         </Stack>
-      </Flex>
-      <Flex flex={1}>
-        <Image
-          alt={'Login Image'}
-          objectFit={'cover'}
-          src={'https://www.pinmaps.net/Images/homecr/home-page-image.png'}
-        />
-      </Flex>
     </Stack>
+      </Flex >
+    <Flex flex={1}>
+      <Image
+        alt={'Login Image'}
+        objectFit={'cover'}
+        src={'https://www.pinmaps.net/Images/homecr/home-page-image.png'}
+      />
+    </Flex>
+    </Stack >
   )
 }
