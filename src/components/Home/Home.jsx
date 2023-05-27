@@ -3,7 +3,7 @@ import Map from "../Map/Map";
 import "./Home.css";
 import Filter from "../Filter/Filter";
 import ResultsBar from "../ResultsBar/ResultsBar";
-import { Search2Icon } from "@chakra-ui/icons";
+// import { Search2Icon } from "@chakra-ui/icons";
 
 import { Input, InputGroup, InputLeftAddon } from "@chakra-ui/react";
 export default function Home() {
