@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-import React from "react";
-import Map from "../Map/Map";
-import "./Home.css";
-import Filter from "../Filter/Filter";
-import ResultsBar from "../ResultsBar/ResultsBar";
-import CreateModal from "../CreateModal/CreateModal";
-=======
 import React from 'react'
 import Map from '../Map/Map'
 import './Home.css'
@@ -18,6 +10,7 @@ import { AuthContext } from '../../context/AuthContext'
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import fakeData from '../../fakeData'
+import CreateModal from "../CreateModal/CreateModal";
 import {
   Input,
   InputGroup,
@@ -30,7 +23,6 @@ import {
 export default function Home () {
   const { dispatch } = useContext(AuthContext)
   const navigate = useNavigate()
->>>>>>> 7425de29bcd995864cb54d691b6773a56079f049
 
   const currentUser = JSON.parse(localStorage.getItem('user'))
 
@@ -70,14 +62,9 @@ export default function Home () {
       </Flex>
       <div className='home'>
         <Filter />
-<<<<<<< HEAD
-        <Map />
-        <ResultsBar />
-        <CreateModal />
-=======
         <Map data={fakeData} />
         <ResultsBar data={fakeData} />
->>>>>>> 7425de29bcd995864cb54d691b6773a56079f049
+        <CreateModal />
       </div>
     </div>
   )
