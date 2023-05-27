@@ -102,7 +102,6 @@ export default function Login() {
                 </Button>
               )}
             </Stack>
-<<<<<<< HEAD
           </form>
           <Link color={"blue.500"} onClick={() => setIsSignUp(!isSignUp)}>
             {isSignUp ? "Have Account? Sign In" : "No Account? Create One"}
@@ -119,22 +118,4 @@ export default function Login() {
       </Flex>
     </Stack>
   );
-=======
-
-            <Button colorScheme={'blue'} variant={'solid'}>
-              Sign in
-            </Button>
-        </Stack>
-    </Stack>
-      </Flex >
-    <Flex flex={1}>
-      <Image
-        alt={'Login Image'}
-        objectFit={'cover'}
-        src={'https://www.pinmaps.net/Images/homecr/home-page-image.png'}
-      />
-    </Flex>
-    </Stack >
-  )
->>>>>>> master
 }
