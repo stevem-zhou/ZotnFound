@@ -3,7 +3,7 @@ import Map from "../Map/Map";
 import "./Home.css";
 import Filter from "../Filter/Filter";
 import ResultsBar from "../ResultsBar/ResultsBar";
-// import { Search2Icon } from "@chakra-ui/icons";
+import CreateModal from "../CreateModal/CreateModal";
 
 import { Input, InputGroup, InputLeftAddon } from "@chakra-ui/react";
 export default function Home() {
@@ -17,6 +17,7 @@ export default function Home() {
         <Filter />
         <Map />
         <ResultsBar />
+        <CreateModal />
       </div>
     </div>
   );
