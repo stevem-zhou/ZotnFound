@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Link } from "react-router-dom";
 import {
     Box,
     Button,
@@ -66,8 +67,8 @@ export default function InfoModal() {
                         This Chopper fought dinosaurs in the late 1980s and gave Luffy a fat cock.
                         Luffy, Nami, ZaddyZoro, BigNose, DeadSkeleton, Puncher, Jinbei
                     </Text>
-                    <Button colorScheme='blue' ml='3' py='10px'>
-                        Contact Me
+                    <Button colorScheme='blue' ml='3' py='10px' >
+                        <a href="mailto:email@example.com">Contact Me</a>
                     </Button>
                 </Stack>
                 <Text color={'gray.500'}>Posted on Feb 08, 2021</Text>
