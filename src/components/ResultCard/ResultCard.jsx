@@ -29,7 +29,7 @@ export default function ResultCard () {
               Katy Huang
             </Text>
             <Text color='blue.600' fontSize='1xl'>
-              May 26, 20203
+              May 26, 2023
             </Text>
           </Flex>
         </Stack>
