@@ -77,10 +77,6 @@ export default function Map({ data }) {
     iconSize: [50, 50],
   });
 
-  function hi() {
-    console.log("hi");
-  }
-
   const allMarkers = data.map((item) => (
     <Marker
       position={item.location}
@@ -92,25 +88,25 @@ export default function Map({ data }) {
         mouseover: (event) => event.target.openPopup(),
       }}
       icon={
-        item.type == "headphone" && item.isLost
+        item.type === "headphone" && item.isLost
           ? headphoneLost
-          : item.type == "phone" && item.isLost
+          : item.type === "phone" && item.isLost
           ? phoneLost
-          : item.type == "wallet" && item.isLost
+          : item.type === "wallet" && item.isLost
           ? walletLost
-          : item.type == "key" && item.isLost
+          : item.type === "key" && item.isLost
           ? keyLost
-          : item.type == "other" && item.isLost
+          : item.type === "other" && item.isLost
           ? othersLost
-          : item.type == "headphone" && !item.isLost
+          : item.type === "headphone" && !item.isLost
           ? headphoneFound
-          : item.type == "phone" && !item.isLost
+          : item.type === "phone" && !item.isLost
           ? phoneFound
-          : item.type == "wallet" && !item.isLost
+          : item.type === "wallet" && !item.isLost
           ? walletFound
-          : item.type == "key" && !item.isLost
+          : item.type === "key" && !item.isLost
           ? keyFound
-          : item.type == "other" && !item.isLost
+          : item.type === "other" && !item.isLost
           ? othersFound
           : othersFound
       }
