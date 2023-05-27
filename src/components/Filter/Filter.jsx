@@ -44,10 +44,13 @@ export default function Filter() {
                 Water Bottle
               </Radio>
               <Radio size="lg" value="backpack" className="text--spacing">
-                Backpack
+                Backpack/Totes
               </Radio>
               <Radio size="lg" value="wallet" className="text--spacing">
                 Wallet
+              </Radio>
+              <Radio size="lg" value="glasses" className="text--spacing">
+                ID Cards
               </Radio>
               <Radio size="lg" value="glasses" className="text--spacing">
                 Glasses
@@ -56,10 +59,7 @@ export default function Filter() {
                 Keys
               </Radio>
               <Radio size="lg" value="phone" className="text--spacing">
-                Phone
-              </Radio>
-              <Radio size="lg" value="laptop" className="text--spacing">
-                Laptop
+                Electronics
               </Radio>
               <Radio size="lg" value="jewelry" className="text--spacing">
                 Jewelry
