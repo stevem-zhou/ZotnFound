@@ -7,8 +7,6 @@ import CreateModal from './components/CreateModal/CreateModal'
 import { ChakraProvider } from '@chakra-ui/react'
 import 'leaflet/dist/leaflet.css'
 
-import { ChakraProvider } from '@chakra-ui/react'
-
 function App () {
   return (
     <ChakraProvider>
