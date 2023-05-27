@@ -4,6 +4,8 @@ import Login from "./components/Login/Login";
 import Home from "./components/Home/Home";
 import ResultCard from "./components/ResultCard/ResultCard";
 import { ChakraProvider } from "@chakra-ui/react";
+import "leaflet/dist/leaflet.css";
+
 
 function App() {
   return (
