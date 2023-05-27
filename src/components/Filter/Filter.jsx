@@ -6,7 +6,8 @@ import {
   Input,
   Switch,
   Button,
-  Checkbox,
+  Box,
+  Text,
   Stack,
   Radio,
   RadioGroup,
@@ -18,23 +19,22 @@ export default function Filter() {
     <div className="filter--bar">
       <h1 className="filter--title">Filter Markers</h1>
       <form>
-        <FormLabel>Select Type of Items You Are Looking For:</FormLabel>
         <FormControl display="flex" alignItems="center" mb="10px">
-          <Switch size="lg" />
-          <FormLabel mb="0px" ml="50px" fontSize="large" fontWeight="400">
+          <Switch colorScheme="red" size="lg" />
+          <FormLabel mb="0px" ml="50px" fontSize="xl">
             Lost
           </FormLabel>
         </FormControl>
 
-        <FormControl display="flex" alignItems="center" mb="50px">
-          <Switch size="lg" />
-          <FormLabel mb="0px" ml="50px" fontSize="large" fontWeight="400">
+        <FormControl display="flex" alignItems="center" mb="40px">
+          <Switch colorScheme="green" size="lg" />
+          <FormLabel mb="0px" ml="50px" fontSize="xl">
             Found
           </FormLabel>
         </FormControl>
 
-        <FormLabel>Select Specific Item:</FormLabel>
-        <div className="radio--container">
+        <FormLabel fontSize="xl">Select Specific Item:</FormLabel>
+        <Box maxHeight="50%" overflow="scroll">
           <RadioGroup>
             <Stack>
               <Radio size="lg" value="headphones" className="text--spacing">
@@ -49,19 +49,19 @@ export default function Filter() {
               <Radio size="lg" value="wallet" className="text--spacing">
                 Wallet
               </Radio>
-              <Radio size="lg" value="wallet" className="text--spacing">
+              <Radio size="lg" value="glasses" className="text--spacing">
                 Glasses
               </Radio>
-              <Radio size="lg" value="wallet" className="text--spacing">
+              <Radio size="lg" value="keys" className="text--spacing">
                 Keys
               </Radio>
-              <Radio size="lg" value="wallet" className="text--spacing">
+              <Radio size="lg" value="phone" className="text--spacing">
                 Phone
               </Radio>
-              <Radio size="lg" value="wallet" className="text--spacing">
+              <Radio size="lg" value="laptop" className="text--spacing">
                 Laptop
               </Radio>
-              <Radio size="lg" value="wallet" className="text--spacing">
+              <Radio size="lg" value="jewelry" className="text--spacing">
                 Jewelry
               </Radio>
               <Radio size="lg" value="everything" className="text--spacing">
@@ -69,9 +69,11 @@ export default function Filter() {
               </Radio>
             </Stack>
           </RadioGroup>
-        </div>
+        </Box>
 
-        <Button mt="20px" _hover={{ bg: '#b4dbd9' }}>Submit</Button>
+        <Button mt="20px" _hover={{ bg: "#b4dbd9" }}>
+          Submit
+        </Button>
       </form>
     </div>
   );
