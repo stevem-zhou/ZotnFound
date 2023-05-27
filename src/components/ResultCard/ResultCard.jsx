@@ -14,11 +14,10 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { InfoIcon } from "@chakra-ui/icons";
-import InfoModal from "../InfoModal/InfoModal.jsx"
+import InfoModal from "../InfoModal/InfoModal.jsx";
 
 export default function ResultCard({ props }) {
-
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   console.log(props);
   return (
@@ -48,7 +47,6 @@ export default function ResultCard({ props }) {
               w="20"
               onClick={onOpen}
             >
-
               View
             </Button>
             {props.isLost ? (
@@ -63,7 +61,12 @@ export default function ResultCard({ props }) {
           </Flex>
         </CardFooter>
       </Card>
-      <InfoModal onOpen={onOpen} onClose={onClose} isOpen={isOpen} />
+      <InfoModal
+        props={props}
+        onOpen={onOpen}
+        onClose={onClose}
+        isOpen={isOpen}
+      />
     </>
   );
 }
