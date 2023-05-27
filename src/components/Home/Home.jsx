@@ -11,6 +11,7 @@ import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import fakeData from '../../fakeData'
 import CreateModal from '../CreateModal/CreateModal'
+
 import {
   Input,
   InputGroup,
@@ -26,17 +27,18 @@ export default function Home () {
   const { dispatch } = useContext(AuthContext)
   const navigate = useNavigate()
 
-  const currentUser = JSON.parse(localStorage.getItem('user'))
 
-  const handleLogout = e => {
-    e.preventDefault()
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+
+  const handleLogout = (e) => {
+    e.preventDefault();
     signOut(auth)
       .then(() => {
         // // Sign-out successful.
-        dispatch({ type: 'LOGOUT' })
-        navigate('/')
+        dispatch({ type: "LOGOUT" });
+        navigate("/");
       })
-      .catch(error => {
+      .catch((error) => {
         // An error happened.
       })
   }
@@ -51,28 +53,29 @@ export default function Home () {
             placeholder='Search Items ...'
             onChange={e => setSearch(e.target.value)}
           />
+
         </InputGroup>
-        <HStack>
-          <Text fontSize='xl' fontWeight='500' mr='4%'>
+        <HStack mr="1%">
+          <Text fontSize="xl" fontWeight="500" mr="4%">
             {currentUser?.email}
           </Text>
           <Button
-            colorScheme='teal'
-            size='lg'
-            mt='2%'
-            mr='2%'
+            colorScheme="blue"
+            size="lg"
+            mt="2%"
+            mr="5%"
             onClick={handleLogout}
           >
             Logout
           </Button>
         </HStack>
       </Flex>
-      <div className='home'>
+      <div className="home">
         <Filter />
         <Map data={fakeData} />
         <ResultsBar data={fakeData} search={search} />
         <CreateModal />
       </div>
     </div>
-  )
+  );
 }
