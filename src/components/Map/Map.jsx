@@ -10,7 +10,7 @@ export default function Map() {
   return (
     <div>
       <MapContainer
-        style={{ height: "90vh", width: "60vw", zIndex: "0"}}
+        style={{ height: "90vh", width: "60vw", borderRadius: "30px", zIndex: "0" }}
         center={[33.6461, -117.8427]}
         zoom={17}
         scrollWheelZoom={false}
