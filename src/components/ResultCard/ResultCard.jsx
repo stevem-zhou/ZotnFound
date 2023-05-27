@@ -1,7 +1,6 @@
-import * as React from "react";
+import * as React from 'react'
 import {
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
   Image,
@@ -9,45 +8,50 @@ import {
   Heading,
   Text,
   Divider,
-  ButtonGroup,
   Button,
-} from "@chakra-ui/react";
-<Card maxW="sm">
-  <CardBody>
-    <Image
-      src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-      alt="Green double couch with wooden legs"
-      borderRadius="lg"
-    />
-    <Stack mt="6" spacing="3">
-      <Heading size="md">Living room Sofa</Heading>
-      <Text>
-        This sofa is perfect for modern tropical spaces, baroque inspired
-        spaces, earthy toned spaces and for people who love a chic design with a
-        sprinkle of vintage design.
-      </Text>
-      <Text color="blue.600" fontSize="2xl">
-        $450
-      </Text>
-    </Stack>
-  </CardBody>
-  <Divider />
-  <CardFooter>
-    <ButtonGroup spacing="2">
-      <Button variant="solid" colorScheme="blue">
-        Buy now
-      </Button>
-      <Button variant="ghost" colorScheme="blue">
-        Add to cart
-      </Button>
-    </ButtonGroup>
-  </CardFooter>
-</Card>;
+  Flex
+} from '@chakra-ui/react'
+import { PhoneIcon } from '@chakra-ui/icons'
 
-export default function ResultCard(){
-    return(
-        <div>
-            resultcard
-        </div>
-    )
+export default function ResultCard () {
+  return (
+    <Card maxW='sm' align={'center'}>
+      <CardBody>
+        <Image
+          src='https://dealerinspire-image-library-prod.s3.us-east-1.amazonaws.com/images/p8kfSWINHpFDEJCA5Bd9fC6yG8cHmYwHnz9qIkXq.jpg'
+          alt='Car key'
+          borderRadius='lg'
+        />
+        <Stack mt='6' spacing='3'>
+          <Heading size='md'>Car key</Heading>
+          <Flex justifyContent={'space-between'}>
+            <Text color='blue.600' fontSize='1xl'>
+              Katy Huang
+            </Text>
+            <Text color='blue.600' fontSize='1xl'>
+              May 26, 20203
+            </Text>
+          </Flex>
+        </Stack>
+      </CardBody>
+      <Divider />
+      <CardFooter>
+        <Flex justifyContent={'space-between'}>
+          <Button
+            variant='ghost'
+            colorScheme='blue'
+            leftIcon={<PhoneIcon />}
+            mr='20%'
+            size='lg'
+            w='40'
+          >
+            View
+          </Button>
+          <Button colorScheme='red' ml='20%' size='lg' w='40'>
+            Lost
+          </Button>
+        </Flex>
+      </CardFooter>
+    </Card>
+  )
 }
