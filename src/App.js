@@ -28,7 +28,7 @@ function App () {
             path='/'
             element={
               <ShowLogin>
-                ;<Login />
+                <Login />
               </ShowLogin>
             }
           />
