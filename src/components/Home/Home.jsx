@@ -6,6 +6,10 @@ import ResultsBar from "../ResultsBar/ResultsBar";
 // import { Search2Icon } from "@chakra-ui/icons";
 
 import { Input, InputGroup, InputLeftAddon } from "@chakra-ui/react";
+import fakeData from "../../fakeData";
+
+// fakeData from database
+
 export default function Home() {
   return (
     <div>
@@ -15,8 +19,8 @@ export default function Home() {
       </InputGroup>
       <div className="home">
         <Filter />
-        <Map />
-        <ResultsBar />
+        <Map data={fakeData} />
+        <ResultsBar data={fakeData} />
       </div>
     </div>
   );
