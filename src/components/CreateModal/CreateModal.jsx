@@ -1,7 +1,6 @@
 import * as React from "react";
 import {
   Center,
-  CloseButton,
   Image,
   Stack,
   Heading,
@@ -9,26 +8,15 @@ import {
   Flex,
   FormLabel,
   Input,
-  Text,
   Switch,
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogContent,
-  AlertDialogOverlay,
   useDisclosure,
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
   FormControl,
   FormHelperText,
 } from "@chakra-ui/react";
-import logo from "../../assets/images/small_logo.png";
+
 import upload from "../../assets/images/download.png";
 import { db } from "../../firebase";
 import { collection, addDoc } from "firebase/firestore";
