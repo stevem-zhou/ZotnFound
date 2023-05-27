@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import "./Map.css";
 
 import L from "leaflet";
@@ -19,7 +19,14 @@ import others_green from "../../assets/logos/others_green.svg";
 
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
+import { useDisclosure } from "@chakra-ui/react";
+import InfoModal from "../InfoModal/InfoModal";
+
 export default function Map({ data }) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const [itemData, setItemData] = useState({});
+
   const headphoneLost = L.icon({
     iconUrl: headphone_red,
     iconSize: [50, 50],
@@ -77,7 +84,13 @@ export default function Map({ data }) {
   const allMarkers = data.map((item) => (
     <Marker
       position={item.location}
-      eventHandlers={{ click: hi }}
+      eventHandlers={{
+        click: () => {
+          onOpen();
+          setItemData(item);
+        },
+        mouseover: (event) => event.target.openPopup(),
+      }}
       icon={
         item.type == "headphone" && item.isLost
           ? headphoneLost
@@ -102,9 +115,7 @@ export default function Map({ data }) {
           : othersFound
       }
     >
-      <Popup>
-        A pretty popup. <br /> Easily customizable.
-      </Popup>
+      <Popup>{item.name}</Popup>
     </Marker>
   ));
 
@@ -127,6 +138,12 @@ export default function Map({ data }) {
         />
         {allMarkers}
       </MapContainer>
+      <InfoModal
+        props={itemData}
+        onOpen={onOpen}
+        onClose={onClose}
+        isOpen={isOpen}
+      />
     </div>
   );
 }
