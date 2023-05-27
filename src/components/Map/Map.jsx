@@ -1,5 +1,5 @@
 import React from "react";
-import "./Map.css"
+import "./Map.css";
 
 import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
 
@@ -8,7 +8,7 @@ export default function Map() {
     console.log("hi");
   }
   return (
-    <div className="map">
+    <div>
       <MapContainer
         style={{ height: "90vh", width: "60vw" }}
         center={[33.6461, -117.8427]}
