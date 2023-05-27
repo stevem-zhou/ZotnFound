@@ -7,22 +7,37 @@ import {
   Heading,
   Button,
   Flex,
-  //   FormControl,
   FormLabel,
   Input,
   Text,
-  Switch
+  Switch,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  useDisclosure
 } from '@chakra-ui/react'
 import logo from '../../assets/images/logo.png'
 import upload from '../../assets/images/download.png'
 
-export default function CreateModal () {
+export default function CreateModal() {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const cancelRef = React.useRef()
   return (
     <Flex>
       <Stack minH={'90vh'} direction={{ base: 'column', md: 'row' }}>
         <Flex align={'center'} justify={'center'}>
           <Stack w={'full'} maxW={'md'}>
-            <Center></Center>
+            <Center>
+              <Image
+                borderRadius='full'
+                boxSize='300px'
+                src={logo}
+                alt='zotnfoundlogo'
+              />
+            </Center>
             <Heading fontSize={'2xl'} py='10px'>
               Oh no! Post here so anteaters can help you!
             </Heading>
@@ -45,9 +60,35 @@ export default function CreateModal () {
             <Input variant='outline' placeholder='Phone Number' />
 
             <Stack>
-              <Button colorScheme={'blue'} variant={'solid'}>
+              <Button colorScheme={'blue'} variant={'solid'} onClick={onOpen}>
                 Submit
               </Button>
+              <AlertDialog
+                isOpen={isOpen}
+                leastDestructiveRef={cancelRef}
+                onClose={onClose}
+              >
+                <AlertDialogOverlay>
+                  <AlertDialogContent>
+                    <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+                      Submit Form
+                    </AlertDialogHeader>
+
+                    <AlertDialogBody>
+                      Are you sure? You can't undo this action afterwards.
+                    </AlertDialogBody>
+
+                    <AlertDialogFooter>
+                      <Button ref={cancelRef} onClick={onClose}>
+                        Cancel
+                      </Button>
+                      <Button colorScheme='blue' onClick={onClose} ml={3}>
+                        Submit
+                      </Button>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialogOverlay>
+              </AlertDialog>
             </Stack>
           </Stack>
         </Flex>
