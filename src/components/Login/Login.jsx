@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from 'react'
 import {
   Button,
   Text,
@@ -10,112 +10,117 @@ import {
   Link,
   Stack,
   Image,
-  Center,
-} from "@chakra-ui/react";
-import logo from "../../assets/images/logo.png";
+  Center
+} from '@chakra-ui/react'
+import logo from '../../assets/images/logo.png'
 import {
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import { auth } from "../../firebase";
+  signInWithEmailAndPassword
+} from 'firebase/auth'
+import { auth } from '../../firebase'
+import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../../context/AuthContext'
 
-export default function Login() {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [isSignUp, setIsSignUp] = React.useState(false);
-  const [error, setError] = React.useState("");
+export default function Login () {
+  const [email, setEmail] = React.useState('')
+  const [password, setPassword] = React.useState('')
+  const [isSignUp, setIsSignUp] = React.useState(false)
+  const [error, setError] = React.useState('')
+  const navigate = useNavigate()
+  const { dispatch } = useContext(AuthContext)
+  function handleEmail (e) {
+    e.preventDefault()
+    setEmail(e.target.value)
+  }
+  function handlePassword (e) {
+    e.preventDefault()
+    setPassword(e.target.value)
+  }
+  function handleSubmit (e) {
+    e.preventDefault()
+    isSignUp ? createUsers() : signIn()
+  }
+  console.log(email, password)
 
-  function handleEmail(e) {
-    e.preventDefault();
-    setEmail(e.target.value);
-  }
-  function handlePassword(e) {
-    e.preventDefault();
-    setPassword(e.target.value);
-  }
-  function handleSubmit(e) {
-    e.preventDefault();
-    isSignUp ? createUsers() : signIn();
-  }
-  console.log(email, password);
-
-  function createUsers() {
+  function createUsers () {
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
+      .then(userCredential => {
+        const user = userCredential.user
       })
-      .catch((error) => {
-        console.log(error.message);
+      .catch(error => {
+        console.log(error.message)
         alert('EMAIL ALREADY IN USE')
-      });
+      })
   }
 
-  function signIn() {
+  function signIn () {
     const user = signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
+      .then(userCredential => {
+        const user = userCredential.user
+        dispatch({ type: 'LOGIN', payload: user })
+        navigate('/home')
       })
-      .catch((error) => {
-        console.log(error);
-        alert("INVALID EMAIL OR PASSWORD")
-      });
-    console.log(user);
+      .catch(error => {
+        console.log(error)
+        alert('INVALID EMAIL OR PASSWORD')
+      })
+    console.log(user)
   }
 
   return (
-    <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
-      <Flex p={8} flex={1} align={"center"} justify={"center"}>
-        <Stack spacing={3} w={"full"} maxW={"md"}>
+    <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
+      <Flex p={8} flex={1} align={'center'} justify={'center'}>
+        <Stack spacing={3} w={'full'} maxW={'md'}>
           <Center>
             <Image
-              borderRadius="full"
-              boxSize="300px"
+              borderRadius='full'
+              boxSize='300px'
               src={logo}
-              alt="zotnfoundLogo"
+              alt='zotnfoundLogo'
             />
           </Center>
-          <Heading fontSize={"2xl"} py="50px">
-            {isSignUp ? "Create your account.." : "Sign in to your account.."}
+          <Heading fontSize={'2xl'} py='50px'>
+            {isSignUp ? 'Create your account..' : 'Sign in to your account..'}
           </Heading>
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <FormControl id="email">
+          <form onSubmit={e => handleSubmit(e)}>
+            <FormControl id='email'>
               <FormLabel>Email address</FormLabel>
-              <Input type="email" onChange={(e) => handleEmail(e)} />
+              <Input type='email' onChange={e => handleEmail(e)} />
             </FormControl>
-            <FormControl id="password">
+            <FormControl id='password'>
               <FormLabel>Password</FormLabel>
-              <Input type="password" onChange={(e) => handlePassword(e)} />
+              <Input type='password' onChange={e => handlePassword(e)} />
             </FormControl>
             <Stack spacing={6}>
               <Stack
-                direction={{ base: "column", sm: "row" }}
-                align={"start"}
-                justify={"space-between"}
+                direction={{ base: 'column', sm: 'row' }}
+                align={'start'}
+                justify={'space-between'}
               ></Stack>
               {isSignUp ? (
-                <Button colorScheme={"green"} variant={"solid"} type="submit">
+                <Button colorScheme={'green'} variant={'solid'} type='submit'>
                   Create Account
                 </Button>
               ) : (
-                <Button colorScheme={"blue"} variant={"solid"} type="submit">
+                <Button colorScheme={'blue'} variant={'solid'} type='submit'>
                   Sign In
                 </Button>
               )}
             </Stack>
           </form>
-          <Link color={"blue.500"} onClick={() => setIsSignUp(!isSignUp)}>
-            {isSignUp ? "Have Account? Sign In" : "No Account? Create One"}
+          <Link color={'blue.500'} onClick={() => setIsSignUp(!isSignUp)}>
+            {isSignUp ? 'Have Account? Sign In' : 'No Account? Create One'}
           </Link>
           <Text>{error}</Text>
         </Stack>
       </Flex>
       <Flex flex={1}>
         <Image
-          alt={"Login Image"}
-          objectFit={"cover"}
-          src={"https://www.pinmaps.net/Images/homecr/home-page-image.png"}
+          alt={'Login Image'}
+          objectFit={'cover'}
+          src={'https://www.pinmaps.net/Images/homecr/home-page-image.png'}
         />
       </Flex>
     </Stack>
-  );
+  )
 }
