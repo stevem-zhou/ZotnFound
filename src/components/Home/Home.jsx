@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Map from '../Map/Map'
 import './Home.css'
 import Filter from '../Filter/Filter'
@@ -10,7 +10,7 @@ import { AuthContext } from '../../context/AuthContext'
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import fakeData from '../../fakeData'
-import CreateModal from "../CreateModal/CreateModal";
+import CreateModal from '../CreateModal/CreateModal'
 import {
   Input,
   InputGroup,
@@ -20,7 +20,9 @@ import {
   HStack,
   Text
 } from '@chakra-ui/react'
+
 export default function Home () {
+  const [search, setSearch] = useState('')
   const { dispatch } = useContext(AuthContext)
   const navigate = useNavigate()
 
@@ -38,12 +40,17 @@ export default function Home () {
         // An error happened.
       })
   }
+  console.log(search)
   return (
     <div>
       <Flex justifyContent='space-between' shadow='md'>
         <InputGroup width='40%' ml='2%' mt='1%' size='lg' mb='1%'>
           <InputLeftAddon children='🔎' />
-          <Input type='teal' placeholder='Search Items ...' />
+          <Input
+            type='teal'
+            placeholder='Search Items ...'
+            onChange={e => setSearch(e.target.value)}
+          />
         </InputGroup>
         <HStack>
           <Text fontSize='xl' fontWeight='500' mr='4%'>
@@ -63,7 +70,7 @@ export default function Home () {
       <div className='home'>
         <Filter />
         <Map data={fakeData} />
-        <ResultsBar data={fakeData} />
+        <ResultsBar data={fakeData} search={search} />
         <CreateModal />
       </div>
     </div>
