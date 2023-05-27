@@ -10,6 +10,7 @@ import { AuthContext } from '../../context/AuthContext'
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import fakeData from '../../fakeData'
+import CreateModal from "../CreateModal/CreateModal";
 import {
   Input,
   InputGroup,
@@ -63,6 +64,7 @@ export default function Home () {
         <Filter />
         <Map data={fakeData} />
         <ResultsBar data={fakeData} />
+        <CreateModal />
       </div>
     </div>
   )
