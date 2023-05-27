@@ -46,7 +46,7 @@ export default function Home () {
         </InputGroup>
         <HStack>
           <Text fontSize='xl' fontWeight='500' mr='4%'>
-            {currentUser.email}
+            {currentUser?.email}
           </Text>
           <Button
             colorScheme='teal'
