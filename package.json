@@ -13,6 +13,7 @@
     "firebase": "^9.22.1",
     "firebase-auth": "^0.1.2",
     "framer-motion": "^10.12.16",
+    "leaflet": "^1.9.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-leaflet": "^4.2.1",

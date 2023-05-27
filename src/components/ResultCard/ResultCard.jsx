@@ -1,4 +1,4 @@
-import * as React from 'react'
+import * as React from "react";
 import {
   Card,
   CardBody,
@@ -9,49 +9,51 @@ import {
   Text,
   Divider,
   Button,
-  Flex
-} from '@chakra-ui/react'
-import { PhoneIcon } from '@chakra-ui/icons'
+  Flex,
+  Tag,
+} from "@chakra-ui/react";
+import { InfoIcon } from "@chakra-ui/icons";
 
-export default function ResultCard () {
+export default function ResultCard({ props }) {
+  console.log(props);
   return (
-    <Card maxW='sm' align={'center'}>
+    <Card maxW="sm" align={"center"} mb="10px">
       <CardBody>
-        <Image
-          src='https://dealerinspire-image-library-prod.s3.us-east-1.amazonaws.com/images/p8kfSWINHpFDEJCA5Bd9fC6yG8cHmYwHnz9qIkXq.jpg'
-          alt='Car key'
-          borderRadius='lg'
-        />
-        <Stack mt='6' spacing='3'>
-          <Heading size='md'>Car key</Heading>
-          <Flex justifyContent={'space-between'}>
-            <Text color='blue.600' fontSize='1xl'>
-              Katy Huang
+        <Image src={props.imageUrl} alt="Car key" borderRadius="lg" />
+        <Stack mt="6" spacing="3">
+          <Flex justifyContent={"space-between"}>
+            <Text color="blue.600" fontSize="md" fontWeight="bold">
+              {props.name}
             </Text>
-            <Text color='blue.600' fontSize='1xl'>
-              May 26, 2023
+            <Text color="blue.600" fontSize="sm">
+              {props.uploadDate}
             </Text>
           </Flex>
         </Stack>
       </CardBody>
       <Divider />
       <CardFooter>
-        <Flex justifyContent={'space-between'}>
+        <Flex justifyContent={"space-between"}>
           <Button
-            variant='ghost'
-            colorScheme='blue'
-            leftIcon={<PhoneIcon />}
-            mr='20%'
-            size='lg'
-            w='40'
+            variant="ghost"
+            colorScheme="blue"
+            leftIcon={<InfoIcon />}
+            size="md"
+            w="20"
           >
             View
           </Button>
-          <Button colorScheme='red' ml='20%' size='lg' w='40'>
-            Lost
-          </Button>
+          {props.isLost ? (
+            <Button colorScheme="red" ml="20%" size="md" w="40">
+              Lost
+            </Button>
+          ) : (
+            <Button colorScheme="green" ml="20%" size="md" w="40">
+              Found
+            </Button>
+          )}
         </Flex>
       </CardFooter>
     </Card>
-  )
+  );
 }

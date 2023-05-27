@@ -9,6 +9,7 @@ import { signOut } from 'firebase/auth'
 import { AuthContext } from '../../context/AuthContext'
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import fakeData from '../../fakeData'
 import {
   Input,
   InputGroup,
@@ -60,8 +61,8 @@ export default function Home () {
       </Flex>
       <div className='home'>
         <Filter />
-        <Map />
-        <ResultsBar />
+        <Map data={fakeData} />
+        <ResultsBar data={fakeData} />
       </div>
     </div>
   )
