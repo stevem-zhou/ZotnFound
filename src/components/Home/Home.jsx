@@ -23,7 +23,6 @@ import {
   Button,
   Flex,
   HStack,
-  Stack,
   Text,
   Image,
 } from "@chakra-ui/react";
@@ -72,6 +71,15 @@ export default function Home() {
       setData(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
   }, []);
+
+  const compareDates = (a, b) => {
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+    return dateB - dateA;
+  };
+
+  // Sort the array by date
+  data.sort(compareDates);
 
   console.log(data);
 

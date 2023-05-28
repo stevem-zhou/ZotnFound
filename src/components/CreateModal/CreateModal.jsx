@@ -71,6 +71,8 @@ export default function CreateModal(props) {
                     <form
                       onSubmit={(e) => {
                         e.preventDefault();
+                        props.setIsLost(true);
+                        setUploadImg("");
                         onClose();
                       }}
                     >
@@ -146,6 +148,8 @@ export default function CreateModal(props) {
                           size="lg"
                           onClick={() => {
                             props.setIsEdit(!props.isEdit);
+                            props.setIsLost(true);
+                            setUploadImg("");
                             onClose();
                           }}
                         >

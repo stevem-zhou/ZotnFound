@@ -72,10 +72,22 @@ export default function InfoModal({
                 },
               }}
             >
-              {currentEmail == props.email && (
+              {currentEmail == props.email ? (
                 <Flex align="center" justifyContent="center">
                   <Tag colorScheme="blue" variant="solid">
                     Owner
+                  </Tag>
+                </Flex>
+              ) : props.isLost ? (
+                <Flex align="center" justifyContent="center">
+                  <Tag colorScheme="red" variant="solid">
+                    Lost
+                  </Tag>
+                </Flex>
+              ) : (
+                <Flex align="center" justifyContent="center">
+                  <Tag colorScheme="green" variant="solid">
+                    Found
                   </Tag>
                 </Flex>
               )}
@@ -91,27 +103,34 @@ export default function InfoModal({
               </Center>
             </Box>
             <Stack pt={10} align={"center"}>
-              <Heading fontSize={"3xl"} fontFamily={"body"} fontWeight={"bold"}>
+              <Heading
+                mt="5px"
+                fontSize={"3xl"}
+                fontFamily={"body"}
+                fontWeight={"bold"}
+              >
                 {props.name}
               </Heading>
               <Text color={"gray.500"} fontSize={"md"}>
                 {props.description}
               </Text>
               <Flex>
-                <Button colorScheme="blue" ml="3" py="10px">
-                  <a
-                    href={`mailto:${
-                      props.email
-                    }?subject=From ZOT-N-FOUND!&body=${
-                      props.isLost
-                        ? "I FOUND YOUR ITEM!!"
-                        : "THANK YOU FOR FINDING MY ITEM!!"
-                    }`}
-                    target="_blank"
-                  >
-                    Contact Me
-                  </a>
-                </Button>
+                {currentEmail != props.email && (
+                  <Button colorScheme="blue" py="10px">
+                    <a
+                      href={`mailto:${
+                        props.email
+                      }?subject=From ZOT-N-FOUND!&body=${
+                        props.isLost
+                          ? "I FOUND YOUR ITEM!!"
+                          : "THANK YOU FOR FINDING MY ITEM!!"
+                      }`}
+                      target="_blank"
+                    >
+                      Contact Me
+                    </a>
+                  </Button>
+                )}
                 {currentEmail == props.email && (
                   <Button
                     colorScheme="red"
