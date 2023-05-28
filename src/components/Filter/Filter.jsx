@@ -8,6 +8,7 @@ import {
   RadioGroup,
   Text,
   Flex,
+  Input,
 } from "@chakra-ui/react";
 import "./Filter.css";
 
@@ -19,7 +20,15 @@ export default function Filter({ setFindFilter }) {
   }, [value]);
 
   return (
-    <div className="filter--bar">
+    <Flex
+      boxShadow="5px 5px 10px #dbdbdb,
+    -5px -5px 10px #ffffff;"
+      flexDirection="column"
+      p="20px"
+      pt="0"
+      w="20vw"
+      borderRadius="10px"
+    >
       <h1 className="filter--title">Filter Markers</h1>
       <form>
         <Flex mb="15px">
@@ -36,7 +45,7 @@ export default function Filter({ setFindFilter }) {
           </Text>
         </Flex>
 
-        <Flex mb="30px">
+        <Flex mb="20px">
           <Switch
             colorScheme="green"
             size="lg"
@@ -82,7 +91,14 @@ export default function Filter({ setFindFilter }) {
             </Stack>
           </RadioGroup>
         </Box>
+        <Input
+          onChange={() => {
+            setFindFilter((prev) => ({ ...prev, uploadDate: value }));
+          }}
+          mt="10px"
+          placeholder="Enter Date (12-12-2023)"
+        />
       </form>
-    </div>
+    </Flex>
   );
 }
