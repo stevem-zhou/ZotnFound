@@ -63,7 +63,7 @@ export default function InfoModal({ onOpen, isOpen, onClose, props }) {
                   height={230}
                   width={282}
                   objectFit={"cover"}
-                  src={props.imageUrl}
+                  src={props.image}
                 />
               </Center>
             </Box>
@@ -77,7 +77,7 @@ export default function InfoModal({ onOpen, isOpen, onClose, props }) {
               <Button colorScheme="blue" ml="3" py="10px">
                 <a href={props.contact}>Contact Me</a>
               </Button>
-              <Text color={"gray.500"}>Posted on {props.uploadDate}</Text>
+              <Text color={"gray.500"}>Posted on {props.date}</Text>
             </Stack>
           </Box>
         </Center>

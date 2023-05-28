@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Map from "../Map/Map";
 import "./Home.css";
 import Filter from "../Filter/Filter";
@@ -11,6 +11,8 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import fakeData from "../../fakeData";
 import CreateModal from "../CreateModal/CreateModal";
+import { onSnapshot, collection, orderBy, query } from "firebase/firestore";
+import { db } from "../../firebase";
 
 import instagram from "../../assets/logos/instagram.svg";
 
@@ -28,12 +30,16 @@ import {
 import logo from "../../assets/images/small_logo.png";
 export default function Home() {
   const [search, setSearch] = useState("");
+  const [data, setData] = useState([]);
+
   const [findFilter, setFindFilter] = useState({
     type: "everything",
     isFound: true,
     isLost: true,
     uploadDate: "",
   });
+
+  console.log(fakeData);
 
   const { dispatch } = useContext(AuthContext);
   const [isEdit, setIsEdit] = React.useState(false);
@@ -58,7 +64,17 @@ export default function Home() {
         // An error happened.
       });
   };
-  console.log(search);
+
+  useEffect(() => {
+    const collectionRef = collection(db, "items");
+    const q = query(collectionRef, orderBy("date"));
+    const unsub = onSnapshot(q, (snapshot) => {
+      setData(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    });
+  }, []);
+
+  console.log(data);
+
   return (
     <div>
       <Flex justifyContent="space-between" shadow="md" alignItems="center">
@@ -116,7 +132,7 @@ export default function Home() {
           />
         </Flex>
         <Map
-          data={fakeData}
+          data={data}
           isEdit={isEdit}
           isLost={isLost}
           type={type}
@@ -128,7 +144,7 @@ export default function Home() {
           search={search}
           findFilter={findFilter}
         />
-        <ResultsBar data={fakeData} search={search} findFilter={findFilter} />
+        <ResultsBar data={data} search={search} findFilter={findFilter} />
       </div>
     </div>
   );

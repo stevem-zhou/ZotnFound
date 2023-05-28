@@ -2,7 +2,6 @@ import "./ResultsBar.css";
 import ResultCard from "../ResultCard/ResultCard";
 import { Box } from "@chakra-ui/react";
 export default function ResultsBar({ data, search, findFilter }) {
-  console.log(findFilter);
   const allResults = data
     .filter((item) => {
       return search.toLowerCase() === ""

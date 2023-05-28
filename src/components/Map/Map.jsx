@@ -194,8 +194,6 @@ export default function Map({
     []
   );
 
-  console.log(image);
-
   async function handleSubmit(image, type, name, description) {
     const dateObj = new Date();
     const formattedDate =
