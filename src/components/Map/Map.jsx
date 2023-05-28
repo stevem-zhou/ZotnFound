@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useRef, useMemo, useCallback } from "react";
+import { useMapEvents } from "react-leaflet/hooks";
+import mapuser from "../../assets/logos/mapuser.svg";
 import "./Map.css";
 
 import L from "leaflet";
@@ -18,14 +20,31 @@ import others_red from "../../assets/logos/others_red.svg";
 import others_green from "../../assets/logos/others_green.svg";
 
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-
 import { useDisclosure } from "@chakra-ui/react";
 import InfoModal from "../InfoModal/InfoModal";
 
-export default function Map({ data, search, findFilter }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+import { db } from "../../firebase";
+import { collection, addDoc } from "firebase/firestore";
 
+export default function Map({
+  data,
+  isEdit,
+  type,
+  isLost,
+  name,
+  email,
+  image,
+  description,
+  setIsEdit,
+  search,
+  findFilter,
+}) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [itemData, setItemData] = useState({});
+  const mapUser = L.icon({
+    iconUrl: mapuser,
+    iconSize: [50, 50],
+  });
 
   const headphoneLost = L.icon({
     iconUrl: headphone_red,
@@ -159,6 +178,67 @@ export default function Map({ data, search, findFilter }) {
       </Marker>
     ));
 
+  const [draggable, setDraggable] = useState(true);
+  const [position, setPosition] = useState([33.6461, -117.8427]);
+  const markerRef = useRef(null);
+
+  const eventHandlers = useMemo(
+    () => ({
+      dragend() {
+        const marker = markerRef.current;
+        if (marker != null) {
+          setPosition(marker.getLatLng());
+        }
+      },
+    }),
+    []
+  );
+
+  console.log(image);
+
+  async function handleSubmit(image, type, name, description) {
+    const dateObj = new Date();
+    const formattedDate =
+      ("0" + (dateObj.getMonth() + 1)).slice(-2) +
+      "-" +
+      ("0" + dateObj.getDate()).slice(-2) +
+      "-" +
+      dateObj.getFullYear();
+
+    await addDoc(collection(db, "items"), {
+      image: image,
+      type: type,
+      isLost: isLost,
+      name: name,
+      description: description,
+      email: email,
+      location: [position.lat, position.lng],
+      date: formattedDate,
+    });
+  }
+
+  const toggleDraggable = useCallback(() => {
+    handleSubmit(image, type, name, description);
+    setIsEdit(!isEdit);
+  }, [handleSubmit]);
+
+  function LocationMarker() {
+    const map = useMapEvents({
+      click() {
+        map.locate();
+      },
+      locationfound(e) {
+        setPosition(e.latlng);
+        map.flyTo(e.latlng, map.getZoom());
+      },
+    });
+
+    return position === null ? null : (
+      <Marker position={position} icon={mapUser}>
+        <Popup>You are here</Popup>
+      </Marker>
+    );
+  }
   return (
     <div>
       <MapContainer
@@ -176,7 +256,45 @@ export default function Map({ data, search, findFilter }) {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+        {!isEdit && <LocationMarker />}
         {allMarkers}
+        {isEdit && (
+          <Marker
+            draggable={draggable}
+            eventHandlers={eventHandlers}
+            position={position}
+            ref={markerRef}
+            icon={
+              type == "headphone" && isLost
+                ? headphoneLost
+                : type == "phone" && isLost
+                ? phoneLost
+                : type == "wallet" && isLost
+                ? walletLost
+                : type == "key" && isLost
+                ? keyLost
+                : type == "other" && isLost
+                ? othersLost
+                : type == "headphone" && !isLost
+                ? headphoneFound
+                : type == "phone" && !isLost
+                ? phoneFound
+                : type == "wallet" && !isLost
+                ? walletFound
+                : type == "key" && !isLost
+                ? keyFound
+                : type == "other" && !isLost
+                ? othersFound
+                : othersFound
+            }
+          >
+            <Popup minWidth={90}>
+              <span onClick={() => toggleDraggable()}>
+                {draggable ? "Click to Confirm Location 🤔" : "CONFIRMED! 👏"}
+              </span>
+            </Popup>
+          </Marker>
+        )}
       </MapContainer>
       <InfoModal
         props={itemData}

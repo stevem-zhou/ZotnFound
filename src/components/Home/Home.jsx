@@ -36,6 +36,12 @@ export default function Home() {
   });
 
   const { dispatch } = useContext(AuthContext);
+  const [isEdit, setIsEdit] = React.useState(false);
+  const [image, setImage] = React.useState("");
+  const [type, setType] = React.useState("");
+  const [isLost, setIsLost] = React.useState(true);
+  const [name, setName] = React.useState("");
+  const [description, setDescription] = React.useState("");
   const navigate = useNavigate();
 
   const currentUser = JSON.parse(localStorage.getItem("user"));
@@ -94,11 +100,34 @@ export default function Home() {
         {/* <CreateModal /> */}
         <Flex alignItems="center" display="block">
           <Filter setFindFilter={setFindFilter} />
-          <CreateModal />
+          <CreateModal
+            setImage={setImage}
+            setDescription={setDescription}
+            setIsLost={setIsLost}
+            setName={setName}
+            setType={setType}
+            image={image}
+            description={description}
+            isLost={isLost}
+            name={name}
+            type={type}
+            isEdit={isEdit}
+            setIsEdit={setIsEdit}
+          />
         </Flex>
-
-        <Map data={fakeData} search={search} findFilter={findFilter} />
-
+        <Map
+          data={fakeData}
+          isEdit={isEdit}
+          isLost={isLost}
+          type={type}
+          image={image}
+          description={description}
+          name={name}
+          email={currentUser.email}
+          setIsEdit={setIsEdit}
+          search={search}
+          findFilter={findFilter}
+        />
         <ResultsBar data={fakeData} search={search} findFilter={findFilter} />
       </div>
     </div>
