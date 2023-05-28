@@ -33,12 +33,24 @@ export default function CreateModal(props) {
   const uploadFile = () => {
     if (!props.image) return;
 
-    const imageRef = ref(storage, `zotnfound/images/${props.image.name}`);
+    const time = new Date().getTime();
+    const imageRef = ref(
+      storage,
+      `zotnfound/images/${time + props.image.name}`
+    );
 
     uploadBytes(imageRef, props.image).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
-        setUploadImg(url);
-        props.setImage(url);
+        if (
+          url.includes(
+            "https://firebasestorage.googleapis.com/v0/b/zotnfound.appspot.com/o/zotnfound%2Fimages%2FNaN"
+          )
+        ) {
+          setUploadImg(upload);
+        } else {
+          setUploadImg(url);
+          props.setImage(url);
+        }
       });
     });
   };
@@ -81,7 +93,7 @@ export default function CreateModal(props) {
                   >
                     <Heading fontSize={"2xl"} py="10px" textAlign="center">
                       {props.isLost
-                        ? "Oh no! Post here so anteaters can help you! 😥 🥲"
+                        ? "Oh no! Post here so anteaters can help you! 😥😭"
                         : "WHAT A LIFE SAVER! 😇😸"}
                     </Heading>
                     <form
@@ -102,7 +114,7 @@ export default function CreateModal(props) {
                               props.setImage(e.target.files[0]);
                             }}
                           />
-                          <Button onClick={uploadFile}>Confirm?</Button>
+                          <Button onClick={uploadFile}>Confirm</Button>
                         </Flex>
                       </FormControl>
                       <FormControl isRequired mb="3">
@@ -157,7 +169,7 @@ export default function CreateModal(props) {
                         />
                       </FormControl>
 
-                      <Flex gap={3} justifyContent="center" mt="10px">
+                      <Flex gap={3} justifyContent="center" mt="10px" mb="10px">
                         <Button
                           colorScheme="red"
                           size="lg"
@@ -192,8 +204,8 @@ export default function CreateModal(props) {
                     <Image
                       sizeBox="100%"
                       src={props.image == "" ? upload : uploadImg}
-                      width="100%"
-                      ml="10%"
+                      width="90%"
+                      borderRadius="30px"
                     />
                   </Flex>
                 </Flex>

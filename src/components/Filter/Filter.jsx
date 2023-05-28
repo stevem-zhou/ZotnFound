@@ -83,7 +83,7 @@ export default function Filter({ setFindFilter }) {
                 Keys
               </Radio>
               <Radio size="lg" value="phone" className="text--spacing">
-                Electronics
+                Phone
               </Radio>
               <Radio size="lg" value="others" className="text--spacing">
                 Others
