@@ -76,7 +76,7 @@ const fakeData = [
     isLost: true,
     contact: "janedoe@example.com",
     type: "others",
-    uploadDate: "05-27-2023",
+    uploadDate: "12-27-2022",
   },
 ];
 

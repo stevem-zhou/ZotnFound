@@ -1,6 +1,7 @@
 import * as React from "react";
 import {
   Center,
+  CloseButton,
   Image,
   Stack,
   Heading,
@@ -8,15 +9,26 @@ import {
   Flex,
   FormLabel,
   Input,
+  Text,
   Switch,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
   useDisclosure,
   Modal,
   ModalOverlay,
   ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
   FormControl,
   FormHelperText,
 } from "@chakra-ui/react";
-
+import logo from "../../assets/images/small_logo.png";
 import upload from "../../assets/images/download.png";
 import { db } from "../../firebase";
 import { collection, addDoc } from "firebase/firestore";
@@ -44,7 +56,20 @@ export default function CreateModal() {
 
   return (
     <>
-      <Button onClick={onOpen}>Open Modal</Button>
+      <Button
+        mt="20px"
+        h="20%"
+        w="100%"
+        _hover={{ bg: "#b4dbd9" }}
+        onClick={onOpen}
+        backgroundColor="#61b895"
+        color="white"
+        fontSize="4xl"
+        fontWeight="bold"
+        borderRadius="20px"
+      >
+        +
+      </Button>
       <Modal isOpen={isOpen} onClose={onClose} size="4xl">
         <ModalOverlay>
           <ModalContent>
@@ -132,6 +157,37 @@ export default function CreateModal() {
                         >
                           Submit
                         </Button>
+                        {/* <AlertDialog
+                        isOpen={isOpen}
+                        leastDestructiveRef={cancelRef}
+                        onClose={onClose}
+                      >
+                        <AlertDialogOverlay>
+                          <AlertDialogContent>
+                            <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                              Submit Form
+                            </AlertDialogHeader>
+
+                            <AlertDialogBody>
+                              Are you sure? You can't undo this action
+                              afterwards.
+                            </AlertDialogBody>
+
+                            <AlertDialogFooter>
+                              <Button ref={cancelRef} onClick={onClose}>
+                                Cancel
+                              </Button>
+                              <Button
+                                colorScheme="blue"
+                                onClick={onClose}
+                                ml={3}
+                              >
+                                Submit
+                              </Button>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialogOverlay>
+                      </AlertDialog> */}
                       </Stack>
                     </form>
                   </Flex>

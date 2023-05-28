@@ -92,8 +92,8 @@ export default function Filter({ setFindFilter }) {
           </RadioGroup>
         </Box>
         <Input
-          onChange={() => {
-            setFindFilter((prev) => ({ ...prev, uploadDate: value }));
+          onChange={(e) => {
+            setFindFilter((prev) => ({ ...prev, uploadDate: e.target.value }));
           }}
           mt="10px"
           placeholder="Enter Date (12-12-2023)"

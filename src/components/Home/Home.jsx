@@ -12,6 +12,8 @@ import { useNavigate } from "react-router-dom";
 import fakeData from "../../fakeData";
 import CreateModal from "../CreateModal/CreateModal";
 
+import instagram from "../../assets/logos/instagram.svg";
+
 import {
   Input,
   InputGroup,
@@ -19,18 +21,23 @@ import {
   Button,
   Flex,
   HStack,
+  Stack,
   Text,
+  Image,
 } from "@chakra-ui/react";
-
+import logo from "../../assets/images/small_logo.png";
 export default function Home() {
   const [search, setSearch] = useState("");
   const [findFilter, setFindFilter] = useState({
     type: "everything",
     isFound: true,
     isLost: true,
+    uploadDate: "",
   });
+
   const { dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
+
   const currentUser = JSON.parse(localStorage.getItem("user"));
 
   const handleLogout = (e) => {
@@ -46,18 +53,28 @@ export default function Home() {
       });
   };
   console.log(search);
-  console.log(findFilter);
   return (
     <div>
-      <Flex justifyContent="space-between" shadow="md">
-        <InputGroup width="40%" ml="2%" mt="1%" size="lg" mb="1%">
-          <InputLeftAddon children="🔎" />
-          <Input
-            type="teal"
-            placeholder="Search Items ..."
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </InputGroup>
+      <Flex justifyContent="space-between" shadow="md" alignItems="center">
+        <Flex alignItems="center" w="10%">
+          <Image boxSize="100" src={logo} mb="3%" mt="3%" ml="10%" />
+          <Text fontSize="xl" fontWeight="500">
+            @zotnfound&nbsp;
+          </Text>
+          <Image boxSize="30px" src={instagram} />
+          {/* <Image boxSize='50' src={instagram} /> */}
+        </Flex>
+        <HStack w="60%">
+          <InputGroup ml="12%" mt="1%" size="lg" mb="1%">
+            <InputLeftAddon children="🔎" />
+            <Input
+              type="teal"
+              placeholder="Search Items ..."
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </InputGroup>
+        </HStack>
+
         <HStack mr="1%">
           <Text fontSize="xl" fontWeight="500" mr="4%">
             {currentUser?.email}
@@ -74,11 +91,15 @@ export default function Home() {
         </HStack>
       </Flex>
       <div className="home">
-        <Filter setFindFilter={setFindFilter} />
-        <Map data={fakeData} search={search} findFilter={findFilter} />
-        <ResultsBar data={fakeData} search={search} findFilter={findFilter} />
-
         {/* <CreateModal /> */}
+        <Flex alignItems="center" display="block">
+          <Filter setFindFilter={setFindFilter} />
+          <CreateModal />
+        </Flex>
+
+        <Map data={fakeData} search={search} findFilter={findFilter} />
+
+        <ResultsBar data={fakeData} search={search} findFilter={findFilter} />
       </div>
     </div>
   );
