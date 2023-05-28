@@ -21,12 +21,28 @@ import {
   FormHelperText,
   Select,
 } from "@chakra-ui/react";
-
+import logo from "../../assets/images/small_logo.png";
 import upload from "../../assets/images/download.png";
+import { storage } from "../../firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 export default function CreateModal(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [uploadImg, setUploadImg] = useState(upload);
+
+  const uploadFile = () => {
+    if (!props.image) return;
+
+    const imageRef = ref(storage, `zotnfound/images/${props.image.name}`);
+
+    uploadBytes(imageRef, props.image).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        setUploadImg(url);
+        props.setImage(url);
+      });
+    });
+  };
+  console.log(props.image);
   return (
     <>
       <Button
@@ -80,16 +96,14 @@ export default function CreateModal(props) {
                         <FormControl isRequired>
                           <FormLabel>File Upload:</FormLabel>
                           <Input
-                            type="text"
+                            type="file"
                             placeholder="Image URL"
                             onChange={(e) => {
-                              props.setImage(e.target.value);
-                              setUploadImg(
-                                e.target.value !== "" ? e.target.value : upload
-                              );
+                              props.setImage(e.target.files[0]);
                             }}
                           />
                         </FormControl>
+                        <button onClick={uploadFile}>click</button>
                       </Center>
                       <FormControl isRequired mb="3">
                         <FormLabel>Select Item Type:</FormLabel>
@@ -104,6 +118,7 @@ export default function CreateModal(props) {
                           <option value="others">Others</option>
                         </Select>
                       </FormControl>
+
                       <FormControl>
                         <Flex justifyContent={"space-between"} mb="0">
                           <FormLabel htmlFor="lost-item">
@@ -176,8 +191,8 @@ export default function CreateModal(props) {
                   <Flex width="50%" justifyContent="center">
                     <Image
                       sizeBox="100%"
-                      src={uploadImg}
-                      maxW="300px"
+                      src={props.image == "" ? upload : uploadImg}
+                      width="100%"
                       ml="10%"
                     />
                   </Flex>
