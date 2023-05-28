@@ -1,6 +1,6 @@
 import { useState, useRef, useMemo, useCallback } from "react";
-import { useMapEvents } from 'react-leaflet/hooks'
-import mapuser from "../../assets/logos/mapuser.svg"
+import { useMapEvents } from "react-leaflet/hooks";
+import mapuser from "../../assets/logos/mapuser.svg";
 import "./Map.css";
 
 import L from "leaflet";
@@ -20,6 +20,8 @@ import others_red from "../../assets/logos/others_red.svg";
 import others_green from "../../assets/logos/others_green.svg";
 
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { useDisclosure } from "@chakra-ui/react";
+import InfoModal from "../InfoModal/InfoModal";
 
 import { db } from "../../firebase";
 import { collection, addDoc } from "firebase/firestore";
@@ -34,7 +36,11 @@ export default function Map({
   image,
   description,
   setIsEdit,
+  search,
+  findFilter,
 }) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [itemData, setItemData] = useState({});
   const mapUser = L.icon({
     iconUrl: mapuser,
     iconSize: [50, 50],
@@ -90,43 +96,87 @@ export default function Map({
     iconSize: [50, 50],
   });
 
-  function hi() {
-    console.log("hi");
-  }
-
-  const allMarkers = data.map((item) => (
-    <Marker
-      position={item.location}
-      eventHandlers={{ click: hi }}
-      icon={
-        item.type == "headphone" && item.isLost
-          ? headphoneLost
-          : item.type == "phone" && item.isLost
-          ? phoneLost
-          : item.type == "wallet" && item.isLost
-          ? walletLost
-          : item.type == "key" && item.isLost
-          ? keyLost
-          : item.type == "other" && item.isLost
-          ? othersLost
-          : item.type == "headphone" && !item.isLost
-          ? headphoneFound
-          : item.type == "phone" && !item.isLost
-          ? phoneFound
-          : item.type == "wallet" && !item.isLost
-          ? walletFound
-          : item.type == "key" && !item.isLost
-          ? keyFound
-          : item.type == "other" && !item.isLost
-          ? othersFound
-          : othersFound
+  const allMarkers = data
+    .filter((item) => {
+      return search.toLowerCase() === ""
+        ? item
+        : item.name.toLowerCase().includes(search);
+    })
+    .filter((item) => {
+      if (findFilter.isLost && item.isLost) {
+        if (findFilter.type === "everything") {
+          return item;
+        } else if (
+          findFilter.type === "headphone" &&
+          item.type === "headphone"
+        ) {
+          return item;
+        } else if (findFilter.type === "phone" && item.type === "phone") {
+          return item;
+        } else if (findFilter.type === "key" && item.type === "key") {
+          return item;
+        } else if (findFilter.type === "wallet" && item.type === "wallet") {
+          return item;
+        } else if (findFilter.type === "others" && item.type === "others") {
+          return item;
+        }
       }
-    >
-      <Popup>
-        A pretty popup. <br /> Easily customizable.
-      </Popup>
-    </Marker>
-  ));
+      if (findFilter.isFound && !item.isLost) {
+        if (findFilter.type === "everything") {
+          return item;
+        } else if (
+          findFilter.type === "headphone" &&
+          item.type === "headphone"
+        ) {
+          return item;
+        } else if (findFilter.type === "phone" && item.type === "phone") {
+          return item;
+        } else if (findFilter.type === "key" && item.type === "key") {
+          return item;
+        } else if (findFilter.type === "wallet" && item.type === "wallet") {
+          return item;
+        } else if (findFilter.type === "others" && item.type === "others") {
+          return item;
+        }
+      }
+    })
+    .map((item) => (
+      <Marker
+        position={item.location}
+        eventHandlers={{
+          click: () => {
+            onOpen();
+            setItemData(item);
+          },
+          mouseover: (event) => event.target.openPopup(),
+        }}
+        icon={
+          item.type === "headphone" && item.isLost
+            ? headphoneLost
+            : item.type === "phone" && item.isLost
+            ? phoneLost
+            : item.type === "wallet" && item.isLost
+            ? walletLost
+            : item.type === "key" && item.isLost
+            ? keyLost
+            : item.type === "other" && item.isLost
+            ? othersLost
+            : item.type === "headphone" && !item.isLost
+            ? headphoneFound
+            : item.type === "phone" && !item.isLost
+            ? phoneFound
+            : item.type === "wallet" && !item.isLost
+            ? walletFound
+            : item.type === "key" && !item.isLost
+            ? keyFound
+            : item.type === "other" && !item.isLost
+            ? othersFound
+            : othersFound
+        }
+      >
+        <Popup>{item.name}</Popup>
+      </Marker>
+    ));
 
   const [draggable, setDraggable] = useState(true);
   const [position, setPosition] = useState([33.6461, -117.8427]);
@@ -206,7 +256,7 @@ export default function Map({
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {!isEdit && <LocationMarker/>}
+        {!isEdit && <LocationMarker />}
         {allMarkers}
         {isEdit && (
           <Marker
@@ -246,6 +296,12 @@ export default function Map({
           </Marker>
         )}
       </MapContainer>
+      <InfoModal
+        props={itemData}
+        onOpen={onOpen}
+        onClose={onClose}
+        isOpen={isOpen}
+      />
     </div>
   );
 }

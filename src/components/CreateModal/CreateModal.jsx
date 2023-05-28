@@ -35,19 +35,26 @@ import upload from "../../assets/images/download.png";
 export default function CreateModal(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
- 
-
   return (
     <>
       <Button
+        mt="20px"
+        h="20%"
+        w="100%"
+        _hover={{ bg: "#b4dbd9" }}
+        backgroundColor="#61b895"
+        color="white"
+        fontSize="4xl"
+        fontWeight="bold"
+        borderRadius="20px"
         onClick={() => {
           onOpen();
           props.setIsEdit(!props.isEdit);
         }}
       >
-        Open Modal
+        +
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="4xl" closeOnOverlayClick={false} >
+      <Modal isOpen={isOpen} onClose={onClose} size="4xl">
         <ModalOverlay>
           <ModalContent>
             <Flex>
