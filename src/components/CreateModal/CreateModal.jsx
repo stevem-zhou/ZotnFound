@@ -92,9 +92,9 @@ export default function CreateModal(props) {
                         onClose();
                       }}
                     >
-                      <Center mb={3}>
-                        <FormControl isRequired>
-                          <FormLabel>File Upload:</FormLabel>
+                      <FormControl isRequired>
+                        <FormLabel>File Upload:</FormLabel>
+                        <Flex mb={3} alignItems="center" flexDirection="row">
                           <Input
                             type="file"
                             placeholder="Image URL"
@@ -102,9 +102,9 @@ export default function CreateModal(props) {
                               props.setImage(e.target.files[0]);
                             }}
                           />
-                        </FormControl>
-                        <button onClick={uploadFile}>click</button>
-                      </Center>
+                          <Button onClick={uploadFile}>Confirm?</Button>
+                        </Flex>
+                      </FormControl>
                       <FormControl isRequired mb="3">
                         <FormLabel>Select Item Type:</FormLabel>
                         <Select
