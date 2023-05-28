@@ -1,16 +1,18 @@
-import React, { useState } from "react";
-import Map from "../Map/Map";
-import "./Home.css";
-import Filter from "../Filter/Filter";
-import ResultsBar from "../ResultsBar/ResultsBar";
-import { auth } from "../../firebase";
-import { signOut } from "firebase/auth";
+import React, { useState } from 'react'
+import Map from '../Map/Map'
+import './Home.css'
+import Filter from '../Filter/Filter'
+import ResultsBar from '../ResultsBar/ResultsBar'
+import { auth } from '../../firebase'
+import { signOut } from 'firebase/auth'
 // import { Search2Icon } from "@chakra-ui/icons";
-import { AuthContext } from "../../context/AuthContext";
-import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import fakeData from "../../fakeData";
-import CreateModal from "../CreateModal/CreateModal";
+import { AuthContext } from '../../context/AuthContext'
+import { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+import fakeData from '../../fakeData'
+import CreateModal from '../CreateModal/CreateModal'
+
+import instagram from '../../assets/logos/instagram.svg'
 
 import {
   Input,
@@ -19,18 +21,16 @@ import {
   Button,
   Flex,
   HStack,
+  Stack,
   Text,
-} from "@chakra-ui/react";
+  Image
+} from '@chakra-ui/react'
+import logo from '../../assets/images/small_logo.png'
+export default function Home () {
+  const [search, setSearch] = useState('')
+  const { dispatch } = useContext(AuthContext)
+  const navigate = useNavigate()
 
-export default function Home() {
-  const [search, setSearch] = useState("");
-  const [findFilter, setFindFilter] = useState({
-    type: "everything",
-    isFound: true,
-    isLost: true,
-  });
-  const { dispatch } = useContext(AuthContext);
-  const navigate = useNavigate();
   const currentUser = JSON.parse(localStorage.getItem('user'))
 
   const handleLogout = e => {
@@ -43,21 +43,31 @@ export default function Home() {
       })
       .catch(error => {
         // An error happened.
-      });
-  };
-  console.log(search);
-  console.log(findFilter);
+      })
+  }
+  console.log(search)
   return (
     <div>
-      <Flex justifyContent="space-between" shadow="md">
-        <InputGroup width="40%" ml="2%" mt="1%" size="lg" mb="1%">
-          <InputLeftAddon children="🔎" />
-          <Input
-            type="teal"
-            placeholder="Search Items ..."
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </InputGroup>
+      <Flex justifyContent='space-between' shadow='md' alignItems='center'>
+        <Flex alignItems='center' w='10%'>
+          <Image boxSize='100' src={logo} mb='3%' mt='3%' ml='10%' />
+          <Text fontSize='xl' fontWeight='500'>
+            @zotnfound&nbsp;
+          </Text>
+          <Image boxSize='30px' src={instagram} />
+          {/* <Image boxSize='50' src={instagram} /> */}
+        </Flex>
+        <HStack w='60%'>
+          <InputGroup ml='12%' mt='1%' size='lg' mb='1%'>
+            <InputLeftAddon children='🔎' />
+            <Input
+              type='teal'
+              placeholder='Search Items ...'
+              onChange={e => setSearch(e.target.value)}
+            />
+          </InputGroup>
+        </HStack>
+
         <HStack mr='1%'>
           <Text fontSize='xl' fontWeight='500' mr='4%'>
             {currentUser?.email}
@@ -73,12 +83,15 @@ export default function Home() {
           </Button>
         </HStack>
       </Flex>
-      <div className="home">
-        <Filter setFindFilter={setFindFilter} />
-        <Map data={fakeData} search={search} />
-        <ResultsBar data={fakeData} search={search} findFilter={findFilter} />
+      <div className='home'>
+        <Flex alignItems='center' display='block'>
+          <Filter />
+          <CreateModal />
+        </Flex>
 
-        <CreateModal />
+        <Map data={fakeData} search={search} />
+
+        <ResultsBar data={fakeData} search={search} />
       </div>
     </div>
   )
