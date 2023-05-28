@@ -104,14 +104,14 @@ export default function InfoModal({
             </Box>
             <Stack pt={10} align={"center"}>
               <Heading
-                mt="5px"
+                mt="20px"
                 fontSize={"3xl"}
                 fontFamily={"body"}
                 fontWeight={"bold"}
               >
                 {props.name}
               </Heading>
-              <Text color={"gray.500"} fontSize={"md"}>
+              <Text textAlign="center" color={"gray.500"} fontSize={"md"}>
                 {props.description}
               </Text>
               <Flex>
