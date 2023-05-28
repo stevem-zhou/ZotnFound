@@ -72,9 +72,13 @@ export default function InfoModal({
                 },
               }}
             >
-              {currentEmail == props.email && <Flex align="center" justifyContent="center">
-                <Tag colorScheme="blue" variant="solid">Owner</Tag>
-              </Flex>}
+              {currentEmail == props.email && (
+                <Flex align="center" justifyContent="center">
+                  <Tag colorScheme="blue" variant="solid">
+                    Owner
+                  </Tag>
+                </Flex>
+              )}
               <Center>
                 <Image
                   rounded={"lg"}
@@ -95,7 +99,18 @@ export default function InfoModal({
               </Text>
               <Flex>
                 <Button colorScheme="blue" ml="3" py="10px">
-                  <a href={props.contact}>Contact Me</a>
+                  <a
+                    href={`mailto:${
+                      props.email
+                    }?subject=From ZOT-N-FOUND!&body=${
+                      props.isLost
+                        ? "I FOUND YOUR ITEM!!"
+                        : "THANK YOU FOR FINDING MY ITEM!!"
+                    }`}
+                    target="_blank"
+                  >
+                    Contact Me
+                  </a>
                 </Button>
                 {currentEmail == props.email && (
                   <Button
@@ -104,7 +119,7 @@ export default function InfoModal({
                     px="36px"
                     onClick={handleDelete}
                   >
-                    <a href={props.contact}>Delete</a>
+                    Delete
                   </Button>
                 )}
               </Flex>
