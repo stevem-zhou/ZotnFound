@@ -32,6 +32,7 @@ export default function Home() {
     type: "everything",
     isFound: true,
     isLost: true,
+    uploadDate: "",
   });
 
   const { dispatch } = useContext(AuthContext);
@@ -90,12 +91,13 @@ export default function Home() {
         </HStack>
       </Flex>
       <div className="home">
+        {/* <CreateModal /> */}
         <Flex alignItems="center" display="block">
           <Filter setFindFilter={setFindFilter} />
           <CreateModal />
         </Flex>
 
-        <Map data={fakeData} search={search} />
+        <Map data={fakeData} search={search} findFilter={findFilter} />
 
         <ResultsBar data={fakeData} search={search} findFilter={findFilter} />
       </div>
