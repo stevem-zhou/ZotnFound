@@ -14,7 +14,7 @@ import {
 import { InfoIcon } from "@chakra-ui/icons";
 import InfoModal from "../InfoModal/InfoModal.jsx";
 
-export default function ResultCard({ props }) {
+export default function ResultCard({ props, currentEmail }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -63,6 +63,7 @@ export default function ResultCard({ props }) {
         onOpen={onOpen}
         onClose={onClose}
         isOpen={isOpen}
+        currentEmail={currentEmail}
       />
     </>
   );

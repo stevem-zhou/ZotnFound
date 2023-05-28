@@ -144,7 +144,7 @@ export default function Home() {
           search={search}
           findFilter={findFilter}
         />
-        <ResultsBar data={data} search={search} findFilter={findFilter} />
+        <ResultsBar data={data} search={search} findFilter={findFilter} currentEmail={currentUser.email}/>
       </div>
     </div>
   );

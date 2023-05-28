@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import {
   Box,
   Button,
@@ -13,9 +12,19 @@ import {
   ModalOverlay,
   ModalContent,
   ModalCloseButton,
+  Flex
 } from "@chakra-ui/react";
+import { db } from "../../firebase";
+import { doc, deleteDoc } from "firebase/firestore";
 
-export default function InfoModal({ onOpen, isOpen, onClose, props }) {
+export default function InfoModal({ onOpen, isOpen, onClose, props, currentEmail}) {
+
+  async function handleDelete(){
+    console.log(props.id)
+    await deleteDoc(doc(db, "items", props.id));
+    onClose()
+  }
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false}>
       <ModalOverlay />
@@ -74,9 +83,14 @@ export default function InfoModal({ onOpen, isOpen, onClose, props }) {
               <Text color={"gray.500"} fontSize={"md"}>
                 {props.description}
               </Text>
-              <Button colorScheme="blue" ml="3" py="10px">
-                <a href={props.contact}>Contact Me</a>
-              </Button>
+              <Flex>
+                <Button colorScheme="blue" ml="3" py="10px">
+                  <a href={props.contact}>Contact Me</a>
+                </Button>
+                {currentEmail == props.email && <Button colorScheme="red" ml="3" px="36px" onClick={handleDelete}>
+                  <a href={props.contact}>Delete</a>
+                </Button>}
+              </Flex>
               <Text color={"gray.500"}>Posted on {props.date}</Text>
             </Stack>
           </Box>
