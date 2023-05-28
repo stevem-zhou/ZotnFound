@@ -139,12 +139,12 @@ export default function Home() {
           image={image}
           description={description}
           name={name}
-          email={currentUser.email}
+          email={currentUser?.email}
           setIsEdit={setIsEdit}
           search={search}
           findFilter={findFilter}
         />
-        <ResultsBar data={data} search={search} findFilter={findFilter} currentEmail={currentUser.email}/>
+        <ResultsBar data={data} search={search} findFilter={findFilter} currentEmail={currentUser?.email}/>
       </div>
     </div>
   );
