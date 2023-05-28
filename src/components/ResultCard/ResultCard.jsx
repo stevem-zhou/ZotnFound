@@ -20,7 +20,7 @@ export default function ResultCard({ props }) {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  console.log(props);
+  // console.log(props);
   return (
     <>
       <Card maxW="sm" align={"center"} mb="10px">
