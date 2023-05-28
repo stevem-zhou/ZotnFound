@@ -153,6 +153,7 @@ export default function Home() {
           setIsEdit={setIsEdit}
           search={search}
           findFilter={findFilter}
+          setIsLost={setIsLost}
         />
         <ResultsBar
           data={data}

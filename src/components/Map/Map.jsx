@@ -43,6 +43,7 @@ export default function Map({
   setIsEdit,
   search,
   findFilter,
+  setIsLost,
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [itemData, setItemData] = useState({});

@@ -69,6 +69,7 @@ export default function CreateModal(props) {
         borderRadius="20px"
         onClick={() => {
           onOpen();
+          props.setIsLost(true);
           props.setIsEdit(!props.isEdit);
         }}
       >
@@ -99,7 +100,6 @@ export default function CreateModal(props) {
                     <form
                       onSubmit={(e) => {
                         e.preventDefault();
-                        props.setIsLost(true);
                         setUploadImg("");
                         onClose();
                       }}

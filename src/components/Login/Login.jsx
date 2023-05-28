@@ -1,4 +1,4 @@
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 import {
   Button,
   Text,
@@ -20,6 +20,7 @@ import {
 import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import wallpaper from "../../assets/images/wallpaper.png";
 
 export default function Login() {
   const [email, setEmail] = React.useState("");
@@ -49,14 +50,14 @@ export default function Login() {
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
-          navigate(0)
+          navigate(0);
         })
         .catch((error) => {
           console.log(error.message);
           alert("EMAIL ALREADY IN USE");
         });
-    } else{
-      alert("INVALID EMAIL: ONLY FROM UCI")
+    } else {
+      alert("INVALID EMAIL: ONLY FROM UCI");
     }
   }
 
@@ -75,7 +76,11 @@ export default function Login() {
   }
 
   return (
-    <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
+    <Stack
+      width={"100vw"}
+      minH={"100vh"}
+      direction={{ base: "column", md: "row" }}
+    >
       <Flex p={8} flex={1} align={"center"} justify={"center"}>
         <Stack spacing={3} w={"full"} maxW={"md"}>
           <Center>
@@ -86,8 +91,8 @@ export default function Login() {
               alt="zotnfoundLogo"
             />
           </Center>
-          <Heading fontSize={"2xl"} py="50px">
-            {isSignUp ? "Create your account.." : "Sign in to your account.."}
+          <Heading fontSize={"3xl"} py="20px">
+            {isSignUp ? "Create ZotnFound Account" : "Welcome Back Anteater!"}
           </Heading>
           <form onSubmit={(e) => handleSubmit(e)}>
             <FormControl id="email">
@@ -123,9 +128,11 @@ export default function Login() {
       </Flex>
       <Flex flex={1}>
         <Image
+          width="100%"
+          height="100vh"
           alt={"Login Image"}
           objectFit={"cover"}
-          src={"https://www.pinmaps.net/Images/homecr/home-page-image.png"}
+          src={wallpaper}
         />
       </Flex>
     </Stack>
