@@ -1,79 +1,88 @@
+import { useState, useEffect } from "react";
+
 import {
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-  Input,
   Switch,
-  Button,
   Box,
-  Text,
   Stack,
   Radio,
-  RadioGroup
-} from '@chakra-ui/react'
-import './Filter.css'
-export default function Filter () {
+  RadioGroup,
+  Text,
+  Flex,
+} from "@chakra-ui/react";
+import "./Filter.css";
+
+export default function Filter({ setFindFilter }) {
+  const [value, setValue] = useState("everything");
+
+  useEffect(() => {
+    setFindFilter((prev) => ({ ...prev, type: value }));
+  }, [value]);
+
   return (
-    <div className='filter--bar'>
-      <h1 className='filter--title'>Filter Markers</h1>
+    <div className="filter--bar">
+      <h1 className="filter--title">Filter Markers</h1>
       <form>
-        <FormControl display='flex' alignItems='center' mb='10px'>
-          <Switch colorScheme='red' size='lg' />
-          <FormLabel mb='0px' ml='50px' fontSize='xl'>
+        <Flex mb="15px">
+          <Switch
+            colorScheme="red"
+            size="lg"
+            defaultChecked
+            onChange={() => {
+              setFindFilter((prev) => ({ ...prev, isLost: !prev.isLost }));
+            }}
+          />
+          <Text mb="0px" ml="50px" fontSize="xl">
             Lost
-          </FormLabel>
-        </FormControl>
+          </Text>
+        </Flex>
 
-        <FormControl display='flex' alignItems='center' mb='40px'>
-          <Switch colorScheme='green' size='lg' />
-          <FormLabel mb='0px' ml='50px' fontSize='xl'>
+        <Flex mb="30px">
+          <Switch
+            colorScheme="green"
+            size="lg"
+            defaultChecked
+            onChange={() => {
+              setFindFilter((prev) => ({ ...prev, isFound: !prev.isFound }));
+            }}
+          />
+          <Text mb="0px" ml="50px" fontSize="xl">
             Found
-          </FormLabel>
-        </FormControl>
+          </Text>
+        </Flex>
 
-        <FormLabel fontSize='xl'>Select Specific Item:</FormLabel>
-        <Box maxHeight='50%' overflow='scroll'>
-          <RadioGroup>
+        <Text fontSize="xl" fontWeight="bold" mb="15px">
+          Select Specific Item:
+        </Text>
+        <Box>
+          <RadioGroup onChange={setValue} value={value}>
             <Stack>
-              <Radio size='lg' value='headphones' className='text--spacing'>
+              <Radio
+                defaultChecked
+                size="lg"
+                value="everything"
+                className="text--spacing"
+              >
+                Everything
+              </Radio>
+              <Radio size="lg" value="headphone" className="text--spacing">
                 Headphones
               </Radio>
-              <Radio size='lg' value='waterBottle' className='text--spacing'>
-                Water Bottle
-              </Radio>
-              <Radio size='lg' value='backpack' className='text--spacing'>
-                Backpack/Totes
-              </Radio>
-              <Radio size='lg' value='wallet' className='text--spacing'>
+              <Radio size="lg" value="wallet" className="text--spacing">
                 Wallet
               </Radio>
-              <Radio size='lg' value='glasses' className='text--spacing'>
-                ID Cards
-              </Radio>
-              <Radio size='lg' value='glasses' className='text--spacing'>
-                Glasses
-              </Radio>
-              <Radio size='lg' value='keys' className='text--spacing'>
+              <Radio size="lg" value="key" className="text--spacing">
                 Keys
               </Radio>
-              <Radio size='lg' value='phone' className='text--spacing'>
+              <Radio size="lg" value="phone" className="text--spacing">
                 Electronics
               </Radio>
-              <Radio size='lg' value='jewelry' className='text--spacing'>
-                Jewelry
-              </Radio>
-              <Radio size='lg' value='everything' className='text--spacing'>
-                Everything
+              <Radio size="lg" value="others" className="text--spacing">
+                Others
               </Radio>
             </Stack>
           </RadioGroup>
         </Box>
-
-        <Button mt='20px' size='lg' w='100%' _hover={{ bg: '#b4dbd9' }}>
-          Submit
-        </Button>
       </form>
     </div>
-  )
+  );
 }
