@@ -12,17 +12,23 @@ import {
   ModalOverlay,
   ModalContent,
   ModalCloseButton,
-  Flex
+  Flex,
+  Tag,
 } from "@chakra-ui/react";
 import { db } from "../../firebase";
 import { doc, deleteDoc } from "firebase/firestore";
 
-export default function InfoModal({ onOpen, isOpen, onClose, props, currentEmail}) {
-
-  async function handleDelete(){
-    console.log(props.id)
+export default function InfoModal({
+  onOpen,
+  isOpen,
+  onClose,
+  props,
+  currentEmail,
+}) {
+  async function handleDelete() {
+    console.log(props.id);
     await deleteDoc(doc(db, "items", props.id));
-    onClose()
+    onClose();
   }
 
   return (
@@ -38,11 +44,11 @@ export default function InfoModal({ onOpen, isOpen, onClose, props, currentEmail
             maxH={"800px"}
             w={"full"}
             bg={useColorModeValue("white", "gray.800")}
-            boxShadow={"2xl"}
+            // boxShadow={"2xl"}
             rounded={"lg"}
             pos={"relative"}
             zIndex={1}
-            marginTop={"15px"}
+            marginTop={"30px"}
           >
             <Box
               rounded={"lg"}
@@ -66,6 +72,9 @@ export default function InfoModal({ onOpen, isOpen, onClose, props, currentEmail
                 },
               }}
             >
+              {currentEmail == props.email && <Flex align="center" justifyContent="center">
+                <Tag colorScheme="blue" variant="solid">Owner</Tag>
+              </Flex>}
               <Center>
                 <Image
                   rounded={"lg"}
@@ -73,6 +82,7 @@ export default function InfoModal({ onOpen, isOpen, onClose, props, currentEmail
                   width={282}
                   objectFit={"cover"}
                   src={props.image}
+                  mt={5}
                 />
               </Center>
             </Box>
@@ -87,10 +97,18 @@ export default function InfoModal({ onOpen, isOpen, onClose, props, currentEmail
                 <Button colorScheme="blue" ml="3" py="10px">
                   <a href={props.contact}>Contact Me</a>
                 </Button>
-                {currentEmail == props.email && <Button colorScheme="red" ml="3" px="36px" onClick={handleDelete}>
-                  <a href={props.contact}>Delete</a>
-                </Button>}
+                {currentEmail == props.email && (
+                  <Button
+                    colorScheme="red"
+                    ml="3"
+                    px="36px"
+                    onClick={handleDelete}
+                  >
+                    <a href={props.contact}>Delete</a>
+                  </Button>
+                )}
               </Flex>
+
               <Text color={"gray.500"}>Posted on {props.date}</Text>
             </Stack>
           </Box>
