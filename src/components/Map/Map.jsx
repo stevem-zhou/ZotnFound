@@ -6,18 +6,23 @@ import "./Map.css";
 import L from "leaflet";
 import headphone_red from "../../assets/logos/headphone_red.svg";
 import headphone_green from "../../assets/logos/headphone_green.svg";
+import headphone_black from "../../assets/logos/headphone_black.svg";
 
 import phone_green from "../../assets/logos/phone_green.svg";
 import phone_red from "../../assets/logos/phone_red.svg";
+import phone_black from "../../assets/logos/phone_black.svg";
 
 import wallet_green from "../../assets/logos/wallet_green.svg";
 import wallet_red from "../../assets/logos/wallet_red.svg";
+import wallet_black from "../../assets/logos/wallet_black.svg";
 
 import key_green from "../../assets/logos/key_green.svg";
 import key_red from "../../assets/logos/key_red.svg";
+import key_black from "../../assets/logos/key_black.svg";
 
 import others_red from "../../assets/logos/others_red.svg";
 import others_green from "../../assets/logos/others_green.svg";
+import others_black from "../../assets/logos/others_black.svg";
 
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useDisclosure } from "@chakra-ui/react";
@@ -56,6 +61,11 @@ export default function Map({
     iconSize: [50, 50],
   });
 
+  const headphoneDrag = L.icon({
+    iconUrl: headphone_black,
+    iconSize: [50, 50],
+  });
+
   const phoneLost = L.icon({
     iconUrl: phone_red,
     iconSize: [50, 50],
@@ -63,6 +73,11 @@ export default function Map({
 
   const phoneFound = L.icon({
     iconUrl: phone_green,
+    iconSize: [50, 50],
+  });
+
+  const phoneDrag = L.icon({
+    iconUrl: phone_black,
     iconSize: [50, 50],
   });
 
@@ -76,6 +91,11 @@ export default function Map({
     iconSize: [50, 50],
   });
 
+  const keyDrag = L.icon({
+    iconUrl: key_black,
+    iconSize: [50, 50],
+  });
+
   const walletLost = L.icon({
     iconUrl: wallet_red,
     iconSize: [50, 50],
@@ -86,6 +106,11 @@ export default function Map({
     iconSize: [50, 50],
   });
 
+  const walletDrag = L.icon({
+    iconUrl: wallet_black,
+    iconSize: [50, 50],
+  });
+
   const othersLost = L.icon({
     iconUrl: others_red,
     iconSize: [50, 50],
@@ -93,6 +118,11 @@ export default function Map({
 
   const othersFound = L.icon({
     iconUrl: others_green,
+    iconSize: [50, 50],
+  });
+
+  const othersDrag = L.icon({
+    iconUrl: others_black,
     iconSize: [50, 50],
   });
 
@@ -159,7 +189,7 @@ export default function Map({
             ? walletLost
             : item.type === "key" && item.isLost
             ? keyLost
-            : item.type === "other" && item.isLost
+            : item.type === "others" && item.isLost
             ? othersLost
             : item.type === "headphone" && !item.isLost
             ? headphoneFound
@@ -169,7 +199,7 @@ export default function Map({
             ? walletFound
             : item.type === "key" && !item.isLost
             ? keyFound
-            : item.type === "other" && !item.isLost
+            : item.type === "others" && !item.isLost
             ? othersFound
             : othersFound
         }
@@ -262,29 +292,7 @@ export default function Map({
             eventHandlers={eventHandlers}
             position={position}
             ref={markerRef}
-            icon={
-              type == "headphone" && isLost
-                ? headphoneLost
-                : type == "phone" && isLost
-                ? phoneLost
-                : type == "wallet" && isLost
-                ? walletLost
-                : type == "key" && isLost
-                ? keyLost
-                : type == "other" && isLost
-                ? othersLost
-                : type == "headphone" && !isLost
-                ? headphoneFound
-                : type == "phone" && !isLost
-                ? phoneFound
-                : type == "wallet" && !isLost
-                ? walletFound
-                : type == "key" && !isLost
-                ? keyFound
-                : type == "other" && !isLost
-                ? othersFound
-                : othersFound
-            }
+            icon={othersDrag}
           >
             <Popup minWidth={90}>
               <span onClick={() => toggleDraggable()}>

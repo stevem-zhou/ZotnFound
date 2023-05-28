@@ -13,20 +13,10 @@ import {
   Input,
   Text,
   Switch,
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogContent,
-  AlertDialogOverlay,
   useDisclosure,
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
   FormControl,
   FormHelperText,
   Select,
@@ -72,10 +62,15 @@ export default function CreateModal(props) {
       >
         +
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="5xl">
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        size="5xl"
+        closeOnOverlayClick={false}
+      >
         <ModalOverlay>
           <ModalContent>
-            <Flex width="100%" justifyContent="center">
+            <Flex width="100%" justifyContent="center" padding="10px">
               <Stack minH={"70vh"} direction={{ base: "column", md: "row" }}>
                 <Flex align={"center"} justify={"center"} ml={10}>
                   <Flex
@@ -84,12 +79,16 @@ export default function CreateModal(props) {
                     align="center"
                     gap={2}
                   >
-                    <Heading fontSize={"2xl"} py="10px">
-                      Oh no! Post here so anteaters can help you!
+                    <Heading fontSize={"2xl"} py="10px" textAlign="center">
+                      {props.isLost
+                        ? "Oh no! Post here so anteaters can help you! 😥 🥲"
+                        : "WHAT A LIFE SAVER! 😇😸"}
                     </Heading>
                     <form
                       onSubmit={(e) => {
                         e.preventDefault();
+                        props.setIsLost(true);
+                        setUploadImg("");
                         onClose();
                       }}
                     >
@@ -158,7 +157,19 @@ export default function CreateModal(props) {
                         />
                       </FormControl>
 
-                      <Stack>
+                      <Flex gap={3} justifyContent="center" mt="10px">
+                        <Button
+                          colorScheme="red"
+                          size="lg"
+                          onClick={() => {
+                            props.setIsEdit(!props.isEdit);
+                            props.setIsLost(true);
+                            setUploadImg("");
+                            onClose();
+                          }}
+                        >
+                          Cancel
+                        </Button>
                         <Button
                           colorScheme={
                             props.image != "" &&
@@ -170,10 +181,11 @@ export default function CreateModal(props) {
                           }
                           variant={"solid"}
                           type="submit"
+                          size="lg"
                         >
                           Continue
                         </Button>
-                      </Stack>
+                      </Flex>
                     </form>
                   </Flex>
                   <Flex width="50%" justifyContent="center">
