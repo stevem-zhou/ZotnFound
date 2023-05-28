@@ -1,7 +1,6 @@
 import * as React from "react";
 import {
   Center,
-  CloseButton,
   Image,
   Stack,
   Heading,
@@ -9,26 +8,15 @@ import {
   Flex,
   FormLabel,
   Input,
-  Text,
   Switch,
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogContent,
-  AlertDialogOverlay,
   useDisclosure,
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
   FormControl,
   FormHelperText,
 } from "@chakra-ui/react";
-import logo from "../../assets/images/small_logo.png";
+
 import upload from "../../assets/images/download.png";
 import { db } from "../../firebase";
 import { collection, addDoc } from "firebase/firestore";
@@ -144,37 +132,6 @@ export default function CreateModal() {
                         >
                           Submit
                         </Button>
-                        {/* <AlertDialog
-                        isOpen={isOpen}
-                        leastDestructiveRef={cancelRef}
-                        onClose={onClose}
-                      >
-                        <AlertDialogOverlay>
-                          <AlertDialogContent>
-                            <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                              Submit Form
-                            </AlertDialogHeader>
-
-                            <AlertDialogBody>
-                              Are you sure? You can't undo this action
-                              afterwards.
-                            </AlertDialogBody>
-
-                            <AlertDialogFooter>
-                              <Button ref={cancelRef} onClick={onClose}>
-                                Cancel
-                              </Button>
-                              <Button
-                                colorScheme="blue"
-                                onClick={onClose}
-                                ml={3}
-                              >
-                                Submit
-                              </Button>
-                            </AlertDialogFooter>
-                          </AlertDialogContent>
-                        </AlertDialogOverlay>
-                      </AlertDialog> */}
                       </Stack>
                     </form>
                   </Flex>

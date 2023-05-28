@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
+
 import {
   Box,
   Button,
@@ -12,14 +12,12 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
-  useDisclosure,
   ModalCloseButton,
 } from "@chakra-ui/react";
 
-const IMAGE =
-  "https://m.media-amazon.com/images/I/51o+c2cvwrL._AC_UF894,1000_QL80_.jpg";
-
 export default function InfoModal({ onOpen, isOpen, onClose, props }) {
+
+  const url = `mailto:${props.contact}`
   return (
     <Modal isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false}>
       <ModalOverlay />
@@ -79,7 +77,8 @@ export default function InfoModal({ onOpen, isOpen, onClose, props }) {
                 {props.description}
               </Text>
               <Button colorScheme="blue" ml="3" py="10px">
-                <a href={props.contact}>Contact Me</a>
+                <a href={url}>Contact Me</a>
+                {/* <a href="mailto:email@example.com">Contact Me</a> */}
               </Button>
               <Text color={"gray.500"}>Posted on {props.uploadDate}</Text>
             </Stack>

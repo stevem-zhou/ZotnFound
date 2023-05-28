@@ -31,18 +31,17 @@ export default function Home() {
   });
   const { dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
+  const currentUser = JSON.parse(localStorage.getItem('user'))
 
-  const currentUser = JSON.parse(localStorage.getItem("user"));
-
-  const handleLogout = (e) => {
-    e.preventDefault();
+  const handleLogout = e => {
+    e.preventDefault()
     signOut(auth)
       .then(() => {
         // // Sign-out successful.
-        dispatch({ type: "LOGOUT" });
-        navigate("/");
+        dispatch({ type: 'LOGOUT' })
+        navigate('/')
       })
-      .catch((error) => {
+      .catch(error => {
         // An error happened.
       });
   };
@@ -59,15 +58,15 @@ export default function Home() {
             onChange={(e) => setSearch(e.target.value)}
           />
         </InputGroup>
-        <HStack mr="1%">
-          <Text fontSize="xl" fontWeight="500" mr="4%">
+        <HStack mr='1%'>
+          <Text fontSize='xl' fontWeight='500' mr='4%'>
             {currentUser?.email}
           </Text>
           <Button
-            colorScheme="blue"
-            size="lg"
-            mt="2%"
-            mr="5%"
+            colorScheme='blue'
+            size='lg'
+            mt='2%'
+            mr='5%'
             onClick={handleLogout}
           >
             Logout
@@ -76,10 +75,11 @@ export default function Home() {
       </Flex>
       <div className="home">
         <Filter setFindFilter={setFindFilter} />
-        <Map data={fakeData} />
+        <Map data={fakeData} search={search} />
         <ResultsBar data={fakeData} search={search} findFilter={findFilter} />
+
         <CreateModal />
       </div>
     </div>
-  );
+  )
 }
