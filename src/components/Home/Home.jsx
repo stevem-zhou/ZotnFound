@@ -24,7 +24,11 @@ import {
 
 export default function Home() {
   const [search, setSearch] = useState("");
-  const [findFilter, setFindFilter] = useState({});
+  const [findFilter, setFindFilter] = useState({
+    type: "everything",
+    isFound: true,
+    isLost: true,
+  });
   const { dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -43,6 +47,7 @@ export default function Home() {
       });
   };
   console.log(search);
+  console.log(findFilter);
   return (
     <div>
       <Flex justifyContent="space-between" shadow="md">
@@ -72,7 +77,7 @@ export default function Home() {
       <div className="home">
         <Filter setFindFilter={setFindFilter} />
         <Map data={fakeData} />
-        <ResultsBar data={fakeData} search={search} />
+        <ResultsBar data={fakeData} search={search} findFilter={findFilter} />
         <CreateModal />
       </div>
     </div>

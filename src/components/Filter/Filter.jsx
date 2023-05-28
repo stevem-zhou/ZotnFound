@@ -1,8 +1,7 @@
+import { useState, useEffect } from "react";
+
 import {
-  FormControl,
-  FormLabel,
   Switch,
-  Button,
   Box,
   Stack,
   Radio,
@@ -13,6 +12,12 @@ import {
 import "./Filter.css";
 
 export default function Filter({ setFindFilter }) {
+  const [value, setValue] = useState("everything");
+
+  useEffect(() => {
+    setFindFilter((prev) => ({ ...prev, type: value }));
+  }, [value]);
+
   return (
     <div className="filter--bar">
       <h1 className="filter--title">Filter Markers</h1>
@@ -23,7 +28,7 @@ export default function Filter({ setFindFilter }) {
             size="lg"
             defaultChecked
             onChange={() => {
-              setFindFilter((prev) => ({ ...prev, isLost: true }));
+              setFindFilter((prev) => ({ ...prev, isLost: !prev.isLost }));
             }}
           />
           <Text mb="0px" ml="50px" fontSize="xl">
@@ -37,7 +42,7 @@ export default function Filter({ setFindFilter }) {
             size="lg"
             defaultChecked
             onChange={() => {
-              setFindFilter((prev) => ({ ...prev, isFound: true }));
+              setFindFilter((prev) => ({ ...prev, isFound: !prev.isFound }));
             }}
           />
           <Text mb="0px" ml="50px" fontSize="xl">
@@ -49,9 +54,14 @@ export default function Filter({ setFindFilter }) {
           Select Specific Item:
         </Text>
         <Box>
-          <RadioGroup>
+          <RadioGroup onChange={setValue} value={value}>
             <Stack>
-              <Radio size="lg" value="everything" className="text--spacing">
+              <Radio
+                defaultChecked
+                size="lg"
+                value="everything"
+                className="text--spacing"
+              >
                 Everything
               </Radio>
               <Radio size="lg" value="headphone" className="text--spacing">
