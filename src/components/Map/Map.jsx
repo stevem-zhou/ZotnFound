@@ -299,6 +299,7 @@ export default function Map({
         onOpen={onOpen}
         onClose={onClose}
         isOpen={isOpen}
+        currentEmail={email}
       />
     </div>
   );
