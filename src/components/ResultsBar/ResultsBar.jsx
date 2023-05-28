@@ -49,7 +49,7 @@ export default function ResultsBar({ data, search, findFilter, currentEmail }) {
     .filter((item) => {
       return findFilter.uploadDate === ""
         ? item
-        : item.uploadDate.includes(findFilter.uploadDate);
+        : item.date.includes(findFilter.uploadDate);
     })
     .map((item) => {
       return <ResultCard props={item} currentEmail={currentEmail} />;

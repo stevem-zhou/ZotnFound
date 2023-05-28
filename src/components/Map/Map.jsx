@@ -171,6 +171,11 @@ export default function Map({
         }
       }
     })
+    .filter((item) => {
+      return findFilter.uploadDate === ""
+        ? item
+        : item.date.includes(findFilter.uploadDate);
+    })
     .map((item) => (
       <Marker
         position={item.location}
