@@ -1,70 +1,43 @@
-# Getting Started with Create React App
+# VenusHack 2023
+<p>A website that allows students to borrow donated items and build long-lasting connections with one another.</p>
+<img src="https://cdn.discordapp.com/attachments/918312671533727855/1113210954075865209/Untitled_design_1.png" width="210px"/>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p>Follow Us at: https://www.instagram.com/zotnfound/</p>
+<img src="https://cdn.discordapp.com/attachments/688278789566103604/1113211583905153066/image.png" width="500px"/>
 
-## Available Scripts
 
-In the project directory, you can run:
+## Table of Contents
++ [Inspiration](#inspiration)<br>
++ [How It Works](#how-it-works)<br>
+  + [Intro](#intro)<br>
+  + [Home](#home)<br>
+  + [Explore](#explore)<br>
+  + [Product](#product)<br>
+  + [Post](#post)<br>
+  + [About](#about)<br>
++ [How We Built It](#how-we-built-it)<br>
++ [Challenges We Faced](#challenges-we-faced)<br>
 
-### `npm start`
+## Inspiration
+We are all college students and have experience the struggles of not having the neccessary funds to purchase items that we actually need in our day to day life. So, we wanted to create a platform that will address this, in hope that it will also support other students that may be going through the same experiences. We also know that building connections may be difficult and wanted to provide a new way for friendships and relationships to grow.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## How It Works
+There are six pages to the website: Intro, Home, Explore, Post, Product, and About.
+### Intro
+Upon entering our website, the user will be greeted with a storyboard that we have created to illustrate the mission behind the project. From there, a home button will also be displayed, which will bring the user to the Home page of the website. 
+### Home
+At this Home page, it displays the three latest items that have been posted onto the website that is ready to be used. 
+### Explore
+Heading to the Explore page through the navigation bar, there will be all the donated items that have been posted and ready to be in the hands of a new owner. These items are all sorted by the date, showing the latest items at the very top and the oldest at the bottom. 
+### Product
+Upon clicking one of the items, it will take you to its Product page, which displays a full clear image of the item, the description which includes: name of item, the duration (how long you can borrow the item for), contact information (owner name and email), and description of the item. There is also a feature that allows you to chat with one another on that same page, and a button that will send a borrow request to the owner by sending an email with a verification link. If this verification link gets pressed, it will remove the item from the page, meaning it's currently being (used/borrowed). 
+### Post
+The Post Page will display a form where the user can enter all the necessary and required information about their items and contact information, which will then display their donation on the Home and Explore pages. 
+### About
+Lastly, the About Us Page which shows the lovely creators of this website and our email-addresses.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## How We Built It
+The web app consists React, HTML, CSS, JS for the frontend. While using Express, Nodemailer, and MongoDB for the backend. We created a database using MongoDB which stores all the information that the post form provides. Through this database, we are able to get the information about the owner's contact information which we will use with nodemailer to send individual emails with verification links about the donated item.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Challenges We Faced
+There were many challenges we faced when building this website. Everything we used to create the web app was new to many of us, and we only had four days to learn all of it before submitting the project. There were many ideas that were brilliant such as creating an account system to verify each item and having a proper way to communicate with the owner through private messages, however time was very limited and we all had little to no experience, so we srapped the idea and went for the email feature. Even though there were many challenges, we were able to overcome each one and in the end completed a web app that we are proud of sharing.
