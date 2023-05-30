@@ -1,5 +1,7 @@
 # VenusHack 2023
-<p>A website that allows students to borrow donated items and build long-lasting connections with one another.</p>
+
+## ZotnFound
+<p>A platform designed for UCI students, allowing them to effortlessly locate and recover lost or found items, ensuring their safe return.</p>
 <img src="https://cdn.discordapp.com/attachments/918312671533727855/1113210954075865209/Untitled_design_1.png" width="210px"/>
 
 <p>Follow Us at: https://www.instagram.com/zotnfound/</p>
