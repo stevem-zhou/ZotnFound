@@ -11,17 +11,13 @@
 ## Table of Contents
 + [Inspiration](#inspiration)<br>
 + [How It Works](#how-it-works)<br>
-  + [Intro](#intro)<br>
+  + [Login](#login)<br>
   + [Home](#home)<br>
-  + [Explore](#explore)<br>
-  + [Product](#product)<br>
-  + [Post](#post)<br>
-  + [About](#about)<br>
 + [How We Built It](#how-we-built-it)<br>
 + [Challenges We Faced](#challenges-we-faced)<br>
 
 ## Inspiration
-We are all college students and have experience the struggles of not having the neccessary funds to purchase items that we actually need in our day to day life. So, we wanted to create a platform that will address this, in hope that it will also support other students that may be going through the same experiences. We also know that building connections may be difficult and wanted to provide a new way for friendships and relationships to grow.
+Many people are constantly losing their belongings, whether that be their phones, keys, or watter bottles. This is especially true for UCI students on the UCI subreddit, where there are countless posts being created about lost and found items. Due to this problem, we decided to take matters into our own hands and created an Instagram account to help lost items return back to their original owners. We have so far helped over 10 people and gained over 300+ followers. The process on Instagram was very time consuming due to us having to manually go through each message and create a post on each individual item that was sent. Due to these restraints, we decided to create a platform that will allow people to post items that they found and lost. These posts had descriptions on the item and where they were last seen.
 
 ## How It Works
 There are six pages to the website: Intro, Home, Explore, Post, Product, and About.
